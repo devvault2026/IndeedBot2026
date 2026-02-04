@@ -13,22 +13,22 @@ export const Navbar = () => {
         <motion.nav
             initial={{ y: -100 }}
             animate={{ y: 0 }}
-            className="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-5 bg-white/90 backdrop-blur-xl border-b border-neutral-100 shadow-sm"
+            className="fixed top-0 left-0 right-0 z-50 px-4 md:px-12 py-4 md:py-5 bg-white/90 backdrop-blur-xl border-b border-neutral-100 shadow-sm"
         >
-            <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                    <Link href="/" className="flex items-center gap-3 group">
-                        <div className="relative">
+            <div className="flex items-center justify-between w-full">
+                <div className="flex items-center gap-2 max-w-[calc(100%-50px)]">
+                    <Link href="/" className="flex items-center gap-2 md:gap-3 group">
+                        <div className="relative shrink-0">
                             <div className="absolute inset-0 bg-primary/20 blur-lg rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
                             <img
                                 src="https://res.cloudinary.com/dpfapm0tl/image/upload/v1770163492/icon_x6kgnr.png"
                                 alt="IndeedBot Logo"
-                                className="w-9 h-9 object-contain relative z-10"
+                                className="w-8 h-8 md:w-9 md:h-9 object-contain relative z-10"
                             />
                         </div>
-                        <span className="text-xl font-bold tracking-tight text-[#2d2d2d]">
+                        <span className="text-lg md:text-xl font-bold tracking-tight text-[#2d2d2d] truncate">
                             Indeed<span className="text-primary font-black">Bot</span>
-                            <span className="ml-2 text-[9px] bg-[#2d2d2d] text-white px-1.5 py-0.5 rounded-md font-black uppercase tracking-widest leading-none shadow-lg shadow-black/20">v4.0</span>
+                            <span className="ml-2 text-[9px] bg-[#2d2d2d] text-white px-1.5 py-0.5 rounded-md font-black uppercase tracking-widest leading-none shadow-lg shadow-black/20 align-middle">v4.0</span>
                         </span>
                     </Link>
                 </div>
@@ -130,7 +130,7 @@ export const Navbar = () => {
                 </div>
 
                 {/* MOBILE MENU TOGGLE */}
-                <div className="lg:hidden">
+                <div className="lg:hidden z-50 relative">
                     <button
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                         className="p-2 text-[#2d2d2d] hover:text-primary transition-colors"
@@ -140,38 +140,75 @@ export const Navbar = () => {
                 </div>
             </div>
 
-            {/* MOBILE MENU CONTENT */}
+            {/* PREMIUM MOBILE MENU OVERLAY */}
             <AnimatePresence>
                 {isMobileMenuOpen && (
                     <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        className="lg:hidden overflow-hidden"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-40 bg-white/95 backdrop-blur-2xl lg:hidden flex flex-col"
                     >
-                        <div className="pt-6 pb-2 space-y-4">
-                            <div className="font-black text-xs text-neutral-400 uppercase tracking-widest mb-2 px-2">Capabilities</div>
-                            <Link href="/features/intelligence" className="block px-4 py-3 bg-neutral-50 rounded-lg font-bold text-[#2d2d2d]" onClick={() => setIsMobileMenuOpen(false)}>Career Intelligence</Link>
-                            <Link href="/features/resume" className="block px-4 py-3 bg-neutral-50 rounded-lg font-bold text-[#2d2d2d]" onClick={() => setIsMobileMenuOpen(false)}>Resume Architect</Link>
-                            <Link href="/features/scout" className="block px-4 py-3 bg-neutral-50 rounded-lg font-bold text-[#2d2d2d]" onClick={() => setIsMobileMenuOpen(false)}>Corporate Scout</Link>
-                            <Link href="/features/vault" className="block px-4 py-3 bg-neutral-50 rounded-lg font-bold text-[#2d2d2d]" onClick={() => setIsMobileMenuOpen(false)}>Job Vault</Link>
+                        <div className="flex-1 overflow-y-auto pt-24 px-6 pb-8">
+                            <motion.div
+                                initial="hidden"
+                                animate="visible"
+                                variants={{
+                                    hidden: { opacity: 0 },
+                                    visible: {
+                                        opacity: 1,
+                                        transition: {
+                                            staggerChildren: 0.1
+                                        }
+                                    }
+                                }}
+                                className="space-y-6"
+                            >
+                                <motion.div variants={{ hidden: { x: -20, opacity: 0 }, visible: { x: 0, opacity: 1 } }}>
+                                    <p className="text-xs font-black text-neutral-400 uppercase tracking-[0.2em] mb-4">Core Capabilities</p>
+                                    <div className="grid gap-3">
+                                        <Link href="/features/intelligence" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-4 p-4 bg-neutral-50 rounded-2xl border border-neutral-100 active:scale-95 transition-transform">
+                                            <div className="p-2 bg-white rounded-xl shadow-sm"><Sparkles className="w-5 h-5 text-primary" /></div>
+                                            <span className="font-bold text-[#2d2d2d] text-sm">Career Intelligence</span>
+                                        </Link>
+                                        <Link href="/features/resume" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-4 p-4 bg-neutral-50 rounded-2xl border border-neutral-100 active:scale-95 transition-transform">
+                                            <div className="p-2 bg-white rounded-xl shadow-sm"><Cpu className="w-5 h-5 text-purple-600" /></div>
+                                            <span className="font-bold text-[#2d2d2d] text-sm">Resume Architect</span>
+                                        </Link>
+                                        <Link href="/features/scout" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-4 p-4 bg-neutral-50 rounded-2xl border border-neutral-100 active:scale-95 transition-transform">
+                                            <div className="p-2 bg-white rounded-xl shadow-sm"><Target className="w-5 h-5 text-indigo-600" /></div>
+                                            <span className="font-bold text-[#2d2d2d] text-sm">Corporate Scout</span>
+                                        </Link>
+                                        <Link href="/features/vault" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-4 p-4 bg-neutral-50 rounded-2xl border border-neutral-100 active:scale-95 transition-transform">
+                                            <div className="p-2 bg-white rounded-xl shadow-sm"><Database className="w-5 h-5 text-amber-600" /></div>
+                                            <span className="font-bold text-[#2d2d2d] text-sm">Job Vault</span>
+                                        </Link>
+                                    </div>
+                                </motion.div>
 
-                            <div className="h-px bg-neutral-100 my-2" />
+                                <motion.div variants={{ hidden: { x: -20, opacity: 0 }, visible: { x: 0, opacity: 1 } }} className="h-px bg-neutral-100 w-full" />
 
-                            <Link href="/pricing" className="block px-2 py-2 font-black text-[#2d2d2d] uppercase tracking-widest text-sm" onClick={() => setIsMobileMenuOpen(false)}>Pricing</Link>
-                            <Link href="/docs" className="block px-2 py-2 font-black text-[#2d2d2d] uppercase tracking-widest text-sm" onClick={() => setIsMobileMenuOpen(false)}>Documentation</Link>
-
-                            <div className="pt-4 flex flex-col gap-3">
-                                <Link href="/pricing" onClick={() => setIsMobileMenuOpen(false)}>
-                                    <button className="w-full py-4 bg-primary text-white font-black uppercase tracking-widest rounded-xl">
-                                        Secure Access
-                                    </button>
-                                </Link>
-                                <button className="w-full py-4 text-neutral-500 font-black uppercase tracking-widest text-xs">
-                                    Log In
-                                </button>
-                            </div>
+                                <motion.div variants={{ hidden: { x: -20, opacity: 0 }, visible: { x: 0, opacity: 1 } }} className="space-y-4">
+                                    <Link href="/pricing" onClick={() => setIsMobileMenuOpen(false)} className="block text-2xl font-black text-[#2d2d2d] uppercase tracking-tighter italic">Pricing</Link>
+                                    <Link href="/docs" onClick={() => setIsMobileMenuOpen(false)} className="block text-2xl font-black text-[#2d2d2d] uppercase tracking-tighter italic">Documentation</Link>
+                                    <div className="text-xl font-black text-neutral-300 uppercase tracking-tighter italic">Login Portal</div>
+                                </motion.div>
+                            </motion.div>
                         </div>
+
+                        <motion.div
+                            initial={{ y: 50, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ delay: 0.4 }}
+                            className="p-6 border-t border-neutral-100 bg-white/50 backdrop-blur-md"
+                        >
+                            <Link href="/pricing" onClick={() => setIsMobileMenuOpen(false)}>
+                                <button className="w-full py-5 bg-[#2d2d2d] text-white font-black uppercase tracking-widest rounded-xl text-sm shadow-xl flex items-center justify-center gap-3">
+                                    <Zap className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                                    Secure Access
+                                </button>
+                            </Link>
+                        </motion.div>
                     </motion.div>
                 )}
             </AnimatePresence>

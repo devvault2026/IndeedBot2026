@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export const Hero = () => {
     return (
-        <section className="relative min-h-[90vh] flex flex-col items-center justify-center pt-32 pb-32 px-4 overflow-hidden bg-white">
+        <section className="relative min-h-[90vh] flex flex-col items-center justify-center pt-24 md:pt-32 pb-20 md:pb-32 px-4 overflow-hidden bg-white">
             {/* Background Decorative Gradient */}
             <div className="absolute top-0 inset-x-0 h-[800px] bg-gradient-to-b from-neutral-50 to-transparent -z-10" />
 
