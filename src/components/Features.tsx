@@ -2,7 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Zap, Target, CheckCircle2, FileText, Brain, ArrowRight, Activity, Terminal, Sparkles, Layout, Database, Shield, Search } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 
 const FeatureCard = ({ children, className = "" }: { children: React.ReactNode, className?: string }) => (
     <div className={`relative glass-dark rounded-[3rem] border border-border p-2 shadow-premium group overflow-hidden ${className}`}>
@@ -14,6 +14,11 @@ const FeatureCard = ({ children, className = "" }: { children: React.ReactNode, 
 );
 
 export const Features = () => {
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
     return (
         <section id="features" className="py-32 md:py-64 px-6 relative overflow-hidden bg-background">
             {/* Background Glows */}
@@ -257,7 +262,7 @@ export const Features = () => {
                                             <span className="text-[10px] font-black text-green-400">EXCELLENT</span>
                                         </div>
                                         <div className="flex gap-1">
-                                            {[...Array(20)].map((_, i) => (
+                                            {mounted && [...Array(20)].map((_, i) => (
                                                 <motion.div
                                                     key={i}
                                                     animate={{ height: [10, Math.random() * 20 + 10, 10] }}

@@ -35,7 +35,7 @@ export const metadata: Metadata = {
 
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ClerkProvider } from "@clerk/nextjs";
-import { Footer } from "@/components/Footer";
+import { ConditionalFooter } from "@/components/ConditionalFooter";
 
 const clerkPubKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 // ... (omitting AuthProvider for brevity, wait I should include it if I'm replacing the block)
@@ -69,7 +69,7 @@ export default function RootLayout({
               <div className="flex-grow">
                 {children}
               </div>
-              <Footer />
+              <ConditionalFooter />
             </div>
           </ThemeProvider>
         </body>

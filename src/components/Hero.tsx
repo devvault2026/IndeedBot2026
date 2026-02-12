@@ -33,7 +33,10 @@ export const Hero = () => {
         y.set(yPct);
     }
 
+    const [mounted, setMounted] = useState(false);
+
     useEffect(() => {
+        setMounted(true);
         const timer = setInterval(() => {
             setStep((prev) => (prev + 1) % AI_STEPS.length);
         }, 2500);
@@ -49,10 +52,10 @@ export const Hero = () => {
                 <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-blue-600/10 blur-[150px] rounded-full animate-pulse opacity-30" />
 
                 {/* Tactical Particles */}
-                {[...Array(20)].map((_, i) => (
+                {mounted && [...Array(20)].map((_, i) => (
                     <motion.div
                         key={i}
-                        initial={{ opacity: 0, x: Math.random() * 100 + "%", y: Math.random() * 100 + "%" }}
+                        initial={{ opacity: 0, x: `${Math.random() * 100}%`, y: `${Math.random() * 100}%` }}
                         animate={{
                             opacity: [0.1, 0.4, 0.1],
                             y: ["-10%", "110%"],
