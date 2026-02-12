@@ -1,60 +1,64 @@
 "use client";
 
 import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 import { motion } from "framer-motion";
-import { Lock, ShieldCheck, Database, Smartphone, HardDrive } from "lucide-react";
+import { Lock, ShieldCheck, Database, Smartphone, HardDrive, Zap } from "lucide-react";
+import Link from "next/link";
 
 export default function VaultPage() {
     return (
-        <main className="min-h-screen bg-background text-foreground antialiased">
+        <main className="min-h-screen bg-background text-foreground antialiased md:pt-14">
             <Navbar />
 
             {/* Hero Section */}
             <section className="pt-40 pb-24 px-6 relative overflow-hidden">
                 <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-blue-500/10 blur-[150px] rounded-full pointer-events-none -z-10" />
 
-                <div className="max-w-7xl mx-auto flex flex-col items-center text-center relative z-10">
+                <div className="container mx-auto flex flex-col items-center text-center relative z-10">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8 border-blue-500/20"
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8 border-blue-500/20 shadow-2xl"
                     >
                         <Lock className="w-4 h-4 text-blue-400 shadow-glow-blue" />
-                        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-foreground/50 italic">Agent Echo / Encryption Vault</span>
+                        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-foreground/50 italic">The Vault Online</span>
                     </motion.div>
 
                     <h1 className="text-6xl md:text-9xl font-black mb-10 text-foreground italic uppercase tracking-tighter leading-[0.8]">
-                        OFFLINE <br /><span className="text-blue-400 not-italic">PERSISTENCE.</span>
+                        PRIVATE <br /><span className="text-blue-400 not-italic">SOVEREIGNTY.</span>
                     </h1>
-                    <p className="text-xl text-neutral-400 mb-16 leading-relaxed font-medium max-w-3xl italic">
-                        Your intelligence shouldn't depend on an internet connection. Agent Echo encrypts and stores
-                        your leads, resumes, and tactics locally—ensuring absolute privacy and 24/7 access.
+                    <p className="text-xl md:text-2xl text-neutral-400 mb-16 leading-relaxed font-medium max-w-3xl italic">
+                        Your career data shouldn't be for sale. The Vault encrypts and stores your jobs,
+                        resumes, and search history locally—ensuring absolute privacy and 24/7 access.
                     </p>
                     <div className="flex flex-wrap gap-4 justify-center">
-                        <button className="px-12 py-6 bg-foreground text-background font-black rounded-2xl shadow-2xl hover:scale-105 transition-all uppercase tracking-widest text-sm">
-                            INITIALIZE THE VAULT
-                        </button>
+                        <Link href="/sign-up">
+                            <button className="px-12 py-6 bg-foreground text-background font-black rounded-2xl shadow-2xl hover:scale-105 transition-all uppercase tracking-[0.2em] text-sm">
+                                Secure Your Data — Free
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </section>
 
             {/* Visualization Section */}
             <section className="py-32 px-6">
-                <div className="max-w-7xl mx-auto">
+                <div className="container mx-auto max-w-7xl">
                     <div className="glass-dark p-2 rounded-[4rem] border border-border shadow-3xl bg-background/40 relative overflow-hidden group">
                         <div className="glass rounded-[3.9rem] p-12 md:p-24 border border-border relative">
                             {/* Grid UI background */}
                             <div className="absolute inset-0 opacity-10 pointer-events-none"
                                 style={{ backgroundImage: 'linear-gradient(to right, #1e40af 1px, transparent 1px), linear-gradient(to bottom, #1e40af 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
 
-                            <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                            <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-20 items-center text-left">
                                 <div className="space-y-12">
-                                    <h2 className="text-5xl font-black text-foreground italic uppercase tracking-tighter leading-tight">HARDENED <br />LOCAL STORAGE.</h2>
+                                    <h2 className="text-5xl font-black text-foreground italic uppercase tracking-tighter leading-tight">HARDENED <br />ENCRYPTION.</h2>
                                     <div className="space-y-8">
                                         {[
-                                            { icon: ShieldCheck, title: "Zero-Knowledge Sync", desc: "We don't hold your keys. Your data is encrypted with AES-256 before it ever hits the cache." },
-                                            { icon: Database, title: "Edge Persistence", desc: "Advanced IndexedDB implementation allows for complex queries and lead management without a server." },
-                                            { icon: Smartphone, title: "Mobile Ready", desc: "Sync your intelligence across your devices using PWA technology for seamless field operations." }
+                                            { icon: ShieldCheck, title: "Zero-Knowledge", desc: "We don't hold your keys. Your data is encrypted with AES-256 before it ever hits the cache." },
+                                            { icon: Database, title: "Local Persistence", desc: "Advanced storage implementation allows for complex queries and lead management without a server." },
+                                            { icon: Zap, title: "Offline Access", desc: "Access your intelligence anywhere, even without a connection. Your vault is always local." }
                                         ].map((item, i) => (
                                             <div key={i} className="flex gap-6 group">
                                                 <div className="shrink-0 w-12 h-12 glass rounded-xl flex items-center justify-center text-blue-400 border-blue-500/20 group-hover:scale-110 transition-transform">
@@ -78,7 +82,7 @@ export default function VaultPage() {
                                             <Lock className="w-20 h-20 text-blue-400 shadow-glow-blue" />
                                         </div>
                                         <div className="text-center space-y-2">
-                                            <p className="text-2xl font-black text-foreground tracking-widest uppercase italic">Vault_01</p>
+                                            <p className="text-2xl font-black text-foreground tracking-widest uppercase italic">Vault_Active</p>
                                             <p className="text-[10px] font-black text-blue-400/50 uppercase tracking-[6px] italic">STATUS: ENCRYPTED</p>
                                         </div>
                                     </div>
@@ -91,8 +95,8 @@ export default function VaultPage() {
                                     >
                                         <HardDrive className="w-8 h-8 text-blue-400" />
                                         <div>
-                                            <p className="text-[10px] font-black text-foreground/40 uppercase italic tracking-widest">Local Buffer</p>
-                                            <p className="text-lg font-black text-foreground italic">14.2 GB</p>
+                                            <p className="text-[10px] font-black text-foreground/40 uppercase italic tracking-widest">Local Data</p>
+                                            <p className="text-lg font-black text-foreground italic">Secured</p>
                                         </div>
                                     </motion.div>
                                 </div>
@@ -106,18 +110,16 @@ export default function VaultPage() {
             <section className="py-48 px-6 text-center relative overflow-hidden">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[600px] bg-blue-500/5 blur-[150px] rounded-full pointer-events-none" />
 
-                <h2 className="text-5xl md:text-8xl font-black mb-12 italic uppercase tracking-tighter text-foreground leading-none relative z-10">
+                <h2 className="text-5xl md:text-9xl font-black mb-12 italic uppercase tracking-tighter text-foreground leading-none relative z-10">
                     YOUR DATA.<br />
-                    <span className="text-blue-400 not-italic">YOUR SOVEREIGNTY.</span>
+                    <span className="text-blue-400 not-italic">YOUR FUTURE.</span>
                 </h2>
-                <button className="px-14 py-7 bg-foreground text-background font-black text-2xl rounded-2xl shadow-2xl hover:scale-105 transition-all uppercase tracking-widest relative z-10">
-                    DEPLOY MISSION CACHE
-                </button>
+                <Link href="/sign-up">
+                    <button className="px-14 py-7 bg-foreground text-background font-black text-2xl rounded-2xl shadow-2xl hover:scale-105 transition-all uppercase tracking-[0.2em] relative z-10">
+                        Secure Your Future — Free
+                    </button>
+                </Link>
             </section>
-
-            <footer className="py-20 px-6 border-t border-border text-center">
-                <p className="text-[10px] font-black text-neutral-600 uppercase tracking-[0.5em] italic">© 2026 INDEEDBOT SYSTEMS — ALL RIGHTS RESERVED</p>
-            </footer>
         </main>
     );
 }

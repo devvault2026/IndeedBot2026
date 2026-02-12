@@ -34,18 +34,18 @@ export const Navbar = () => {
         >
             <div className="container mx-auto flex items-center justify-between">
                 <div className="flex items-center gap-12">
-                    <Link href="/" className="flex items-center gap-3 group">
+                    <Link href="/" className="flex items-center gap-2 lg:gap-3 group shrink-0">
                         <div className="relative shrink-0">
                             <div className="absolute inset-0 bg-primary/40 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                            <div className="w-10 h-10 glass rounded-xl flex items-center justify-center relative z-10 border-border group-hover:border-primary/50 transition-colors">
+                            <div className="w-8 h-8 lg:w-10 lg:h-10 glass rounded-lg lg:rounded-xl flex items-center justify-center relative z-10 border-border group-hover:border-primary/50 transition-colors">
                                 <img
                                     src="https://res.cloudinary.com/dpfapm0tl/image/upload/v1770163492/icon_x6kgnr.png"
                                     alt="IndeedBot"
-                                    className="w-6 h-6 object-contain"
+                                    className="w-5 h-5 lg:w-6 lg:h-6 object-contain"
                                 />
                             </div>
                         </div>
-                        <span className="text-xl font-black tracking-tighter text-foreground uppercase italic group-hover:text-primary transition-colors">
+                        <span className="text-lg lg:text-xl font-black tracking-tighter text-foreground uppercase italic group-hover:text-primary transition-colors">
                             Indeed<span className="text-primary not-italic">Bot</span>
                         </span>
                     </Link>
@@ -109,20 +109,23 @@ export const Navbar = () => {
                             </AnimatePresence>
                         </div>
 
+                        <Link href="/blog" className="hover:text-foreground transition-colors">Blog</Link>
                         <Link href="/pricing" className="hover:text-foreground transition-colors">Pricing</Link>
                         <Link href="/docs" className="hover:text-foreground transition-colors">How it Works</Link>
                     </div>
                 </div>
 
-                <div className="flex items-center gap-4">
-                    <ThemeToggle />
+                <div className="flex items-center gap-2 lg:gap-4">
+                    <div className="hidden sm:block">
+                        <ThemeToggle />
+                    </div>
 
-                    <div className="flex items-center gap-6">
+                    <div className="flex items-center gap-4 lg:gap-6">
                         <SignedOut>
                             <Link href="/sign-in">
-                                <button className="hidden md:flex items-center gap-2 text-[10px] font-black text-neutral-500 hover:text-foreground transition-colors uppercase tracking-[0.2em] group">
+                                <button className="flex items-center gap-2 text-[10px] font-black text-neutral-500 hover:text-foreground transition-colors uppercase tracking-[0.2em] group">
                                     <LogIn className="w-3.5 h-3.5 group-hover:text-primary transition-colors" />
-                                    Login
+                                    <span className="hidden md:inline">Login</span>
                                 </button>
                             </Link>
                         </SignedOut>
@@ -150,7 +153,8 @@ export const Navbar = () => {
                             />
                         </SignedIn>
                     </div>
-                    <button className="group relative px-8 py-3.5 bg-primary text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-xl overflow-hidden shadow-glow-primary hover:scale-[1.05] transition-all flex items-center gap-3">
+
+                    <button className="hidden lg:flex group relative px-8 py-3.5 bg-primary text-white text-[10px] font-black uppercase tracking-[0.2em] rounded-xl overflow-hidden shadow-glow-primary hover:scale-[1.05] transition-all flex items-center gap-3">
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                         <Chrome className="w-4 h-4 group-hover:rotate-12 transition-transform" />
                         ADD TO CHROME — FREE
@@ -159,7 +163,7 @@ export const Navbar = () => {
                     {/* MOBILE TOGGLE */}
                     <button
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        className="lg:hidden w-10 h-10 glass rounded-lg flex items-center justify-center text-foreground"
+                        className="lg:hidden w-10 h-10 glass rounded-lg flex items-center justify-center text-foreground hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
                     >
                         {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
                     </button>
@@ -174,19 +178,25 @@ export const Navbar = () => {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: "100%" }}
                         transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                        className="fixed inset-0 z-[60] bg-background lg:hidden p-8 flex flex-col"
+                        className="fixed inset-0 z-[100] bg-white dark:bg-[#0a0a0a] lg:hidden p-6 flex flex-col overflow-y-auto"
                     >
-                        <div className="flex justify-between items-center mb-16">
+                        <div className="flex justify-between items-center mb-10 pb-6 border-b border-border/50">
                             <span className="text-xl font-black italic uppercase tracking-tighter text-foreground">INDEEDBOT</span>
-                            <button onClick={() => setIsMobileMenuOpen(false)} className="w-12 h-12 glass rounded-full flex items-center justify-center text-foreground">
-                                <X className="w-6 h-6" />
-                            </button>
+                            <div className="flex items-center gap-4">
+                                <ThemeToggle />
+                                <button
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="w-10 h-10 bg-neutral-100 dark:bg-neutral-900 rounded-full flex items-center justify-center text-foreground border border-border"
+                                >
+                                    <X className="w-5 h-5" />
+                                </button>
+                            </div>
                         </div>
 
-                        <div className="flex-1 space-y-12">
+                        <div className="flex-1 space-y-10">
                             <div className="space-y-6">
-                                <p className="text-[10px] font-black text-neutral-600 uppercase tracking-widest">Our AI Agents</p>
-                                <div className="grid gap-4">
+                                <p className="text-[10px] font-black text-primary uppercase tracking-[0.3em]">AI COMMAND CENTER</p>
+                                <div className="grid gap-2">
                                     {[
                                         { name: "Strategist", path: "intelligence" },
                                         { name: "Builder", path: "resume" },
@@ -197,20 +207,22 @@ export const Navbar = () => {
                                             key={cap.name}
                                             href={`/features/${cap.path}`}
                                             onClick={() => setIsMobileMenuOpen(false)}
-                                            className="text-4xl font-black text-foreground italic uppercase tracking-tighter hover:text-primary transition-colors flex items-center justify-between group"
+                                            className="text-4xl font-black text-foreground italic uppercase tracking-tighter hover:text-primary transition-colors flex items-center justify-between group py-2"
                                         >
                                             {cap.name}
-                                            <ArrowRight className="w-8 h-8 opacity-0 group-hover:opacity-100 transition-all translate-x-[-10px] group-hover:translate-x-0" />
+                                            <ArrowRight className="w-6 h-6 text-primary" />
                                         </Link>
                                     ))}
                                 </div>
                             </div>
 
-                            <div className="h-px bg-border" />
-
-                            <div className="space-y-6">
-                                <Link href="/pricing" onClick={() => setIsMobileMenuOpen(false)} className="block text-2xl font-black text-neutral-400 uppercase tracking-widest hover:text-foreground">Pricing</Link>
-                                <Link href="/docs" onClick={() => setIsMobileMenuOpen(false)} className="block text-2xl font-black text-neutral-400 uppercase tracking-widest hover:text-foreground">Learn More</Link>
+                            <div className="space-y-6 pt-6 border-t border-border/50">
+                                <p className="text-[10px] font-black text-neutral-500 uppercase tracking-[0.3em]">RESOURCES</p>
+                                <div className="grid gap-6">
+                                    <Link href="/blog" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-black text-foreground/70 uppercase tracking-tighter hover:text-foreground">Blog</Link>
+                                    <Link href="/pricing" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-black text-foreground/70 uppercase tracking-tighter hover:text-foreground">Pricing</Link>
+                                    <Link href="/docs" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-black text-foreground/70 uppercase tracking-tighter hover:text-foreground">How it Works</Link>
+                                </div>
                             </div>
                         </div>
 

@@ -81,6 +81,15 @@ function ExtensionCallbackContent() {
         sendTokenToExtension();
     }, [isLoaded, isSignedIn, user, searchParams]);
 
+    useEffect(() => {
+        if (status === "success") {
+            const timer = setTimeout(() => {
+                window.location.replace("https://www.indeed.com");
+            }, 500);
+            return () => clearTimeout(timer);
+        }
+    }, [status]);
+
     return (
         <div className="fixed inset-0 bg-background flex items-center justify-center font-sans overflow-hidden select-none transition-colors duration-500">
             {/* Background grid */}
@@ -126,13 +135,6 @@ function ExtensionCallbackContent() {
                                 System Active
                             </span>
                         </div>
-                        <script dangerouslySetInnerHTML={{
-                            __html: `
-                                setTimeout(() => {
-                                    window.location.href = "https://www.indeed.com";
-                                }, 2000);
-                            `
-                        }} />
                     </>
                 )}
 

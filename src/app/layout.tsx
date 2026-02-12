@@ -35,12 +35,14 @@ export const metadata: Metadata = {
 
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Footer } from "@/components/Footer";
 
 const clerkPubKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+// ... (omitting AuthProvider for brevity, wait I should include it if I'm replacing the block)
 
+// Re-writing the block carefully
 function AuthProvider({ children }: { children: React.ReactNode }) {
   if (!clerkPubKey) {
-    // During build-time prerendering or if key is missing, render without Clerk
     return <>{children}</>;
   }
   return <ClerkProvider publishableKey={clerkPubKey}>{children}</ClerkProvider>;
@@ -55,7 +57,7 @@ export default function RootLayout({
     <AuthProvider>
       <html lang="en" suppressHydrationWarning>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased font-sans`}
         >
           <ThemeProvider
             attribute="class"
@@ -63,7 +65,12 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {children}
+            <div className="flex flex-col min-h-screen">
+              <div className="flex-grow">
+                {children}
+              </div>
+              <Footer />
+            </div>
           </ThemeProvider>
         </body>
       </html>

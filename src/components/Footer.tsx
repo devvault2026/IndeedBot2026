@@ -40,23 +40,23 @@ export const Footer = () => {
 
                     {/* Links: Platform */}
                     <div>
-                        <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-neutral-600 mb-10 italic">Intelligence Hub</h4>
+                        <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-neutral-600 mb-10 italic">Features</h4>
                         <ul className="space-y-6 text-sm font-bold text-neutral-400">
-                            <li><NavLink href="/features/intelligence">Market Extraction</NavLink></li>
-                            <li><NavLink href="/features/resume">Resume Alignment</NavLink></li>
-                            <li><NavLink href="/features/scout">Entity Scoring</NavLink></li>
-                            <li><NavLink href="/features/vault">Offline Persistence</NavLink></li>
+                            <li><NavLink href="/features/intelligence">Job Search</NavLink></li>
+                            <li><NavLink href="/features/resume">Resume Help</NavLink></li>
+                            <li><NavLink href="/features/scout">Company Scouting</NavLink></li>
+                            <li><NavLink href="/features/vault">Save Jobs</NavLink></li>
                         </ul>
                     </div>
 
                     {/* Links: Resources */}
                     <div>
-                        <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-neutral-600 mb-10 italic">Operational Data</h4>
+                        <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-neutral-600 mb-10 italic">Resources</h4>
                         <ul className="space-y-6 text-sm font-bold text-neutral-400">
-                            <li><NavLink href="/docs">System Docs</NavLink></li>
-                            <li><NavLink href="/blog">Strategic Blog</NavLink></li>
-                            <li><NavLink href="/status">Network Status</NavLink></li>
-                            <li><NavLink href="/help">Mission Support</NavLink></li>
+                            <li><NavLink href="/docs">How it Works</NavLink></li>
+                            <li><NavLink href="/blog">Our Blog</NavLink></li>
+                            <li><NavLink href="/status">System Status</NavLink></li>
+                            <li><NavLink href="/help">Contact Support</NavLink></li>
                         </ul>
                     </div>
 

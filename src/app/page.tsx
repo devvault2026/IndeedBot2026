@@ -10,7 +10,6 @@ import { Features } from "@/components/Features";
 import { Trust } from "@/components/Trust";
 import { ResponsibleAI } from "@/components/ResponsibleAI";
 import { Pricing } from "@/components/Pricing";
-import { Footer } from "@/components/Footer";
 import { ArrowRight, Chrome, Zap } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -102,8 +101,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </main>
   );
 }

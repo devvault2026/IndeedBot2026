@@ -2,7 +2,6 @@
 
 import { Navbar } from "@/components/Navbar";
 import { Pricing } from "@/components/Pricing";
-import { Footer } from "@/components/Footer";
 
 export default function PricingPage() {
     return (
@@ -11,7 +10,7 @@ export default function PricingPage() {
             <div className="pt-24 pb-12 bg-background">
                 <Pricing />
             </div>
-            <Footer />
+
         </main>
     );
 }
