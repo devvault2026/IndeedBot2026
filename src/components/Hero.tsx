@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
-import { Chrome, Play, ShieldCheck, Zap, Sparkles, TrendingUp, Briefcase, Terminal, Search, UserCheck, CheckCircle2, ArrowRight } from "lucide-react";
+import { Chrome, Play, ShieldCheck, Zap, Sparkles, TrendingUp, Briefcase, Terminal, Search, UserCheck, CheckCircle2, ArrowRight, Star } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 
@@ -104,20 +104,87 @@ export const Hero = () => {
                         </motion.p>
 
                         <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.8, delay: 0.25 }}
+                            className="flex items-center gap-8 mb-16"
+                        >
+                            <div className="flex -space-x-4">
+                                {[
+                                    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop",
+                                    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop",
+                                    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop",
+                                    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop",
+                                    "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop",
+                                    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop"
+                                ].map((url, i) => (
+                                    <motion.div
+                                        key={i}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        whileHover={{ y: -5, zIndex: 50, scale: 1.1 }}
+                                        transition={{
+                                            opacity: { delay: 0.4 + i * 0.1 },
+                                            x: { delay: 0.4 + i * 0.1 },
+                                            y: { type: "spring", stiffness: 300 }
+                                        }}
+                                        className="relative w-14 h-14 rounded-full border-4 border-background overflow-hidden shadow-2xl cursor-pointer group/pfp"
+                                    >
+                                        <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover/pfp:opacity-100 transition-opacity" />
+                                        <img src={url} alt={`User ${i}`} className="w-full h-full object-cover" />
+                                        <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-background rounded-full" />
+                                    </motion.div>
+                                ))}
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ delay: 1.1, type: "spring" }}
+                                    className="w-14 h-14 rounded-full border-4 border-background bg-primary text-white flex items-center justify-center shadow-2xl z-20"
+                                >
+                                    <span className="text-[10px] font-black tracking-tighter">+12k</span>
+                                </motion.div>
+                            </div>
+
+                            <div className="flex flex-col gap-1.5 pt-2">
+                                <div className="flex items-center gap-1.5">
+                                    <div className="flex">
+                                        {[...Array(5)].map((_, i) => (
+                                            <Star key={i} className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+                                        ))}
+                                    </div>
+                                    <span className="text-xs font-black text-foreground italic">4.9/5 Elite Tier</span>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <span className="text-[10px] font-black uppercase tracking-[0.4em] text-neutral-500">
+                                        Network Verified
+                                    </span>
+                                    <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                                </div>
+                            </div>
+                        </motion.div>
+
+                        <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.3 }}
                             className="flex flex-col sm:flex-row items-stretch gap-6"
                         >
                             <Link href="/sign-up" className="group">
-                                <button className="relative w-full sm:w-auto px-10 py-6 bg-foreground text-background font-black text-sm rounded-2xl flex items-center justify-center gap-4 transition-all hover:scale-[1.02] active:scale-95 shadow-2xl hover:shadow-glow-primary overflow-hidden uppercase tracking-widest">
+                                <button className="relative w-full sm:w-auto px-12 py-7 bg-foreground text-background font-black text-sm rounded-2xl flex items-center justify-center gap-4 transition-all hover:scale-[1.02] active:scale-95 shadow-2xl hover:shadow-glow-primary overflow-hidden uppercase tracking-widest">
                                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                                     <Chrome className="w-5 h-5" />
                                     Add to Chrome — Free
                                 </button>
                             </Link>
 
-                            <button className="px-10 py-6 glass text-foreground font-black text-xs rounded-2xl border border-border hover:bg-foreground/5 transition-all flex items-center justify-center gap-3 uppercase tracking-widest group">
+                            <button
+                                onClick={() => document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' })}
+                                className="px-12 py-7 glass text-foreground font-black text-xs rounded-2xl border border-border hover:bg-foreground/5 transition-all flex items-center justify-center gap-3 uppercase tracking-widest group cursor-pointer relative"
+                            >
+                                <div className="absolute -top-2 -right-2 px-2 py-0.5 bg-primary rounded-full flex items-center gap-1 shadow-glow-primary animate-bounce">
+                                    <div className="w-1 h-1 bg-white rounded-full animate-pulse" />
+                                    <span className="text-[8px] font-black text-white px-1">LIVE</span>
+                                </div>
                                 <Play className="w-4 h-4 fill-foreground group-hover:text-primary group-hover:fill-primary transition-colors" />
                                 View Demo
                             </button>

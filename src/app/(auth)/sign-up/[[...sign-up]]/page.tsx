@@ -1,14 +1,12 @@
 "use client";
 
-import { Suspense } from "react";
 import { SignUp } from "@clerk/nextjs";
-import { AuthWrapper } from "@/components/AuthWrapper";
 import { dark } from "@clerk/themes";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-function SignUpContent() {
+export default function SignUpPage() {
     const { theme } = useTheme();
     const [mounted, setMounted] = useState(false);
     const searchParams = useSearchParams();
@@ -27,49 +25,56 @@ function SignUpContent() {
         : undefined;
 
     return (
-        <AuthWrapper>
-            <SignUp
-                forceRedirectUrl={extensionRedirectUrl}
-                appearance={{
-                    baseTheme: clerkTheme,
-                    elements: {
-                        rootBox: "w-full",
-                        card: "bg-transparent shadow-none border-none p-0 w-full flex flex-col",
-                        header: "mb-10 w-full text-center",
-                        headerTitle: "text-4xl font-black italic tracking-tighter text-foreground uppercase mb-2 leading-none text-center w-full",
-                        headerSubtitle: "text-primary font-black uppercase tracking-[0.4em] text-[10px] italic opacity-80 text-center w-full",
-                        socialButtonsBlockButton: "rounded-xl border border-border bg-foreground/[0.03] hover:bg-foreground/[0.08] transition-all h-12 shadow-sm",
-                        socialButtonsBlockButtonText: "text-foreground font-black uppercase tracking-[0.3em] text-[8px]",
-                        dividerLine: "bg-border",
-                        dividerText: "text-neutral-500 font-bold text-[8px] uppercase tracking-[0.4em] italic",
-                        formFieldLabel: "text-[9px] font-black uppercase tracking-[0.3em] text-neutral-500 mb-2 ml-1",
-                        formFieldInput: "rounded-xl border border-border bg-background px-5 text-foreground text-sm focus:ring-2 focus:ring-primary/20 transition-all font-medium h-12 shadow-sm placeholder:text-neutral-300",
-                        formButtonPrimary: "bg-primary hover:bg-blue-600 text-white rounded-xl h-14 font-black text-[12px] uppercase tracking-[0.4em] shadow-glow-primary transition-all active:scale-[0.98] mt-4 relative overflow-hidden",
-                        footerAction: "hidden",
-                        footer: "hidden",
-                        identityPreviewText: "text-foreground font-black italic uppercase tracking-widest",
-                        identityPreviewEditButtonIcon: "text-primary",
-                        formFieldAction: "text-primary font-black uppercase tracking-[0.3em] text-[8px] hover:text-foreground transition-colors",
-                        formResendCodeLink: "text-primary font-black uppercase tracking-[0.3em] text-[8px]",
-                        otpCodeFieldInput: "bg-background border border-border rounded-xl text-primary font-mono text-xl h-12",
-                    },
-                    layout: {
-                        socialButtonsPlacement: "top",
-                        showOptionalFields: false,
-                        helpPageUrl: undefined,
-                        privacyPageUrl: undefined,
-                        termsPageUrl: undefined,
-                    }
-                }}
-            />
-        </AuthWrapper>
-    );
-}
-
-export default function Page() {
-    return (
-        <Suspense>
-            <SignUpContent />
-        </Suspense>
+        <SignUp
+            forceRedirectUrl={extensionRedirectUrl}
+            appearance={{
+                baseTheme: clerkTheme,
+                elements: {
+                    rootBox: "w-full",
+                    card: "bg-transparent shadow-none border-none p-0 w-full flex flex-col gap-0",
+                    header: "mb-6 w-full",
+                    headerTitle: "text-2xl font-black tracking-tighter text-foreground uppercase italic leading-none",
+                    headerSubtitle: "text-neutral-500 font-medium text-[13px] mt-2 leading-relaxed",
+                    socialButtonsBlockButton:
+                        "rounded-2xl border border-border bg-foreground/[0.02] hover:bg-foreground/[0.06] hover:border-primary/20 transition-all h-[52px] shadow-sm group",
+                    socialButtonsBlockButtonText:
+                        "text-foreground font-bold text-[12px] tracking-wide group-hover:text-primary transition-colors",
+                    socialButtonsBlockButtonArrow: "text-primary",
+                    dividerLine: "bg-border",
+                    dividerText:
+                        "text-neutral-400 font-bold text-[10px] uppercase tracking-[0.3em]",
+                    formFieldLabel:
+                        "text-[10px] font-black uppercase tracking-[0.2em] text-neutral-500 mb-2",
+                    formFieldInput:
+                        "rounded-2xl border border-border bg-background hover:border-primary/20 focus:border-primary/40 px-5 text-foreground text-sm focus:ring-2 focus:ring-primary/10 transition-all font-medium h-[52px] shadow-sm placeholder:text-neutral-400",
+                    formButtonPrimary:
+                        "bg-primary hover:bg-blue-600 text-white rounded-2xl h-[56px] font-black text-[11px] uppercase tracking-[0.35em] shadow-glow-primary hover:shadow-[0_0_50px_-8px_rgba(37,87,167,0.4)] transition-all active:scale-[0.98] mt-2 relative overflow-hidden",
+                    footerAction: "hidden",
+                    footer: "hidden",
+                    identityPreview:
+                        "bg-foreground/[0.03] border border-border rounded-2xl p-4",
+                    identityPreviewText:
+                        "text-foreground font-bold text-sm",
+                    identityPreviewEditButtonIcon: "text-primary",
+                    formFieldAction:
+                        "text-primary font-bold text-[11px] hover:text-blue-400 transition-colors",
+                    formResendCodeLink:
+                        "text-primary font-bold text-[11px]",
+                    otpCodeFieldInput:
+                        "bg-foreground/[0.02] border border-border rounded-2xl text-primary font-mono text-xl h-[52px] focus:border-primary/40",
+                    alert: "rounded-2xl border-red-500/20 bg-red-500/5 text-red-400",
+                    alertText: "text-[12px] font-medium",
+                    formFieldWarningText: "text-amber-500 text-[11px]",
+                    formFieldSuccessText: "text-emerald-500 text-[11px]",
+                },
+                layout: {
+                    socialButtonsPlacement: "top",
+                    showOptionalFields: false,
+                    helpPageUrl: undefined,
+                    privacyPageUrl: undefined,
+                    termsPageUrl: undefined,
+                },
+            }}
+        />
     );
 }

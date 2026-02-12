@@ -1,17 +1,34 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Lock, Power, Terminal, ChevronRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Lock, Shield, Sparkles, ArrowLeft, Zap, CheckCircle2, TrendingUp, Briefcase } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { ThemeToggle } from "./ThemeToggle";
 
+const TESTIMONIALS = [
+    { name: "Sarah K.", role: "Product Manager", quote: "Landed my dream role in 2 weeks. The AI knew exactly what recruiters wanted." },
+    { name: "Marcus D.", role: "Software Engineer", quote: "Went from $95k to $142k. IndeedBot found salary data I never could." },
+    { name: "Priya M.", role: "UX Designer", quote: "3 interviews in my first week. The resume builder is insanely accurate." },
+];
+
+const STATS = [
+    { value: "12,400+", label: "Active Members" },
+    { value: "94%", label: "Interview Rate" },
+    { value: "+$38k", label: "Avg. Salary Lift" },
+];
+
 export const AuthWrapper = ({ children }: { children: React.ReactNode }) => {
-    const [scale, setScale] = useState(1);
     const [resolution, setResolution] = useState({ w: 0, h: 0 });
     const pathname = usePathname();
     const searchParams = useSearchParams();
+    const [activeTestimonial, setActiveTestimonial] = useState(0);
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    // Derived State
+    const isSignUp = pathname?.includes("sign-up");
+    const isSignIn = !isSignUp; // In this layout context, it's a binary choice
 
     // Preserve extension query params when toggling sign-in/sign-up
     const queryString = searchParams.toString();
@@ -19,152 +36,300 @@ export const AuthWrapper = ({ children }: { children: React.ReactNode }) => {
     const signUpHref = queryString ? `/sign-up?${queryString}` : "/sign-up";
 
     useEffect(() => {
-        document.body.style.overflow = 'hidden';
+        document.body.style.overflow = "hidden";
         const handleResize = () => {
-            const vh = window.innerHeight;
-            const vw = window.innerWidth;
-            setResolution({ w: vw, h: vh });
-            const targetH = 900;
-            const targetW = vw < 1000 ? 550 : 1400;
-            const scaleH = vh / targetH;
-            const scaleW = vw / targetW;
-            const newScale = Math.min(scaleH, scaleW, 1);
-            setScale(newScale < 0.4 ? 0.4 : newScale);
+            setResolution({ w: window.innerWidth, h: window.innerHeight });
         };
         handleResize();
         window.addEventListener("resize", handleResize);
         return () => {
             window.removeEventListener("resize", handleResize);
-            document.body.style.overflow = 'auto';
+            document.body.style.overflow = "auto";
         };
     }, []);
 
-    const isNarrow = resolution.w < 1000;
+    // Cycle testimonials
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setActiveTestimonial((prev) => (prev + 1) % TESTIMONIALS.length);
+        }, 4000);
+        return () => clearInterval(timer);
+    }, []);
+
+    const isNarrow = resolution.w < 900;
 
     return (
-        <div className="fixed inset-0 bg-background flex items-center justify-center font-sans overflow-hidden select-none transition-colors duration-500">
-            {/* --- BACKGROUND EFFECTS --- */}
+        <div ref={containerRef} className="fixed inset-0 bg-background flex font-sans overflow-hidden select-none transition-colors duration-500">
+            {/* === ATMOSPHERIC BACKGROUND === */}
             <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+                {/* Grid */}
                 <div
-                    className="absolute inset-0 opacity-[0.4] dark:opacity-[0.2]"
+                    className="absolute inset-0 opacity-[0.35] dark:opacity-[0.15]"
                     style={{
                         backgroundImage: `linear-gradient(var(--adaptive-border) 1px, transparent 1px), linear-gradient(90deg, var(--adaptive-border) 1px, transparent 1px)`,
-                        backgroundSize: '40px 40px',
-                        maskImage: 'radial-gradient(ellipse at center, black, transparent 90%)'
+                        backgroundSize: "50px 50px",
+                        maskImage: "radial-gradient(ellipse 80% 60% at 30% 50%, black, transparent 100%)",
                     }}
                 />
+                {/* Primary orb */}
+                <motion.div
+                    animate={{ scale: [1, 1.15, 1], opacity: [0.15, 0.25, 0.15] }}
+                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute top-[10%] left-[15%] w-[600px] h-[600px] bg-primary/20 blur-[180px] rounded-full"
+                />
+                {/* Secondary orb */}
+                <motion.div
+                    animate={{ scale: [1, 1.1, 1], opacity: [0.1, 0.2, 0.1] }}
+                    transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+                    className="absolute bottom-[5%] right-[10%] w-[500px] h-[500px] bg-blue-500/10 blur-[150px] rounded-full"
+                />
+                {/* Noise texture */}
+                <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.025] mix-blend-overlay" />
             </div>
 
-            {/* --- MAIN CONTAINER --- */}
+            {/* === LEFT PANEL: BRANDING & SOCIAL PROOF === */}
+            {!isNarrow && (
+                <motion.div
+                    initial={{ opacity: 0, x: -40 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                    className="flex-1 relative z-10 flex flex-col justify-between p-14 overflow-hidden"
+                >
+                    {/* Top bar: Logo + Theme */}
+                    <div className="flex items-center justify-between">
+                        <Link href="/" className="flex items-center gap-4 group">
+                            <motion.div
+                                whileHover={{ scale: 1.05 }}
+                                className="w-12 h-12 bg-background rounded-2xl flex items-center justify-center border border-border group-hover:border-primary/40 transition-all shadow-premium relative overflow-hidden"
+                            >
+                                <img
+                                    src="https://res.cloudinary.com/dpfapm0tl/image/upload/v1770163492/icon_x6kgnr.png"
+                                    alt="IndeedBot"
+                                    className="w-7 h-7 object-contain"
+                                />
+                            </motion.div>
+                            <div className="flex flex-col">
+                                <h1 className="text-xl font-black tracking-tighter text-foreground uppercase italic leading-none">
+                                    Indeed<span className="text-primary not-italic">Bot</span>
+                                </h1>
+                                <span className="text-[9px] font-bold tracking-[0.4em] text-neutral-500 uppercase mt-1">
+                                    Career Intelligence
+                                </span>
+                            </div>
+                        </Link>
+
+                        <div className="flex items-center gap-3">
+                            <Link
+                                href="/"
+                                className="flex items-center gap-2 px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-[0.2em] text-neutral-500 hover:text-foreground hover:bg-foreground/5 transition-all"
+                            >
+                                <ArrowLeft className="w-3 h-3" />
+                                Home
+                            </Link>
+                            <ThemeToggle />
+                        </div>
+                    </div>
+
+                    {/* Center: Headline */}
+                    <div className="my-auto space-y-10 max-w-xl">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.3, duration: 0.8 }}
+                        >
+                            <div className="inline-flex items-center gap-3 px-4 py-2 bg-primary/5 border border-primary/20 rounded-full mb-8">
+                                <Sparkles className="w-3.5 h-3.5 text-primary" />
+                                <span className="text-[9px] font-black uppercase tracking-[0.3em] text-primary">
+                                    Trusted by 12,400+ Professionals
+                                </span>
+                            </div>
+
+                            <h2 className="text-[72px] xl:text-[88px] font-black leading-[0.85] tracking-tighter text-foreground uppercase italic leading-none">
+                                {isSignIn ? "Your Career" : "Join the"}<br />
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-400 to-indigo-500 not-italic">
+                                    {isSignIn ? "Starts Here." : "Next Gen."}
+                                </span>
+                            </h2>
+
+                            <p className="text-neutral-600 dark:text-neutral-500 text-lg font-medium leading-relaxed mt-10 max-w-md">
+                                {isSignIn
+                                    ? "Sign in to access your AI-powered career suite — resume optimization, salary intelligence, and interview prep."
+                                    : "Create your elite profile and start outperforming the market with multi-agent career intelligence."}
+                            </p>
+                        </motion.div>
+
+                        {/* Testimonial Carousel */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.5, duration: 0.8 }}
+                            className="relative"
+                        >
+                            <div className="bg-foreground/[0.03] border border-border rounded-2xl p-6 relative overflow-hidden min-h-[120px]">
+                                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2" />
+                                <AnimatePresence mode="wait">
+                                    <motion.div
+                                        key={activeTestimonial}
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -10 }}
+                                        transition={{ duration: 0.4 }}
+                                        className="relative z-10"
+                                    >
+                                        <p className="text-foreground/90 dark:text-foreground/80 text-sm italic leading-relaxed mb-4">
+                                            &ldquo;{TESTIMONIALS[activeTestimonial].quote}&rdquo;
+                                        </p>
+                                        <div className="flex items-center gap-3">
+                                            <div className="w-8 h-8 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center">
+                                                <span className="text-[10px] font-black text-primary">
+                                                    {TESTIMONIALS[activeTestimonial].name.charAt(0)}
+                                                </span>
+                                            </div>
+                                            <div>
+                                                <div className="text-[11px] font-black text-foreground uppercase tracking-tight">
+                                                    {TESTIMONIALS[activeTestimonial].name}
+                                                </div>
+                                                <div className="text-[9px] font-bold text-neutral-500 tracking-wider">
+                                                    {TESTIMONIALS[activeTestimonial].role}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                </AnimatePresence>
+                                <div className="flex gap-2 mt-5">
+                                    {TESTIMONIALS.map((_, i) => (
+                                        <div
+                                            key={i}
+                                            className={`h-1 rounded-full transition-all duration-500 ${i === activeTestimonial ? "w-8 bg-primary" : "w-2 bg-border"
+                                                }`}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
+
+                    {/* Bottom: Stats Bar */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.7, duration: 0.8 }}
+                        className="flex items-center gap-10 pt-8 border-t border-border"
+                    >
+                        {STATS.map((stat, i) => (
+                            <div key={i} className="flex items-center gap-4">
+                                <div className="text-center">
+                                    <div className="text-2xl font-black text-foreground italic tracking-tight">
+                                        {stat.value}
+                                    </div>
+                                    <div className="text-[8px] font-black uppercase tracking-[0.3em] text-neutral-600 dark:text-neutral-500 mt-1">
+                                        {stat.label}
+                                    </div>
+                                </div>
+                                {i < STATS.length - 1 && (
+                                    <div className="w-px h-10 bg-border ml-6" />
+                                )}
+                            </div>
+                        ))}
+                    </motion.div>
+                </motion.div>
+            )}
+
+            {/* === RIGHT PANEL: AUTH FORM === */}
             <motion.div
-                style={{ scale, transformOrigin: 'center center' }}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className={`${isNarrow ? 'w-[550px]' : 'w-[1400px]'} h-[900px] bg-background rounded-[2.5rem] shadow-premium flex relative z-10 border border-border overflow-hidden transition-all duration-500`}
+                initial={{ opacity: 0, x: isNarrow ? 0 : 40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+                className={`${isNarrow ? "w-full" : "w-[520px] xl:w-[560px]"} relative z-10 flex flex-col bg-background/60 dark:bg-background/40 backdrop-blur-xl ${isNarrow ? "" : "border-l border-border"}`}
             >
-                <HUDOverlay resolution={resolution} isNarrow={isNarrow} />
+                {/* Subtle right panel glow */}
+                <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                    <div className="absolute top-[-20%] right-[-20%] w-[400px] h-[400px] bg-primary/[0.04] blur-[100px] rounded-full" />
+                    <div className="absolute bottom-[-10%] left-[-10%] w-[300px] h-[300px] bg-blue-500/[0.03] blur-[80px] rounded-full" />
+                </div>
 
-                {/* --- LEFT SECTOR: BRANDING --- */}
-                {!isNarrow && (
-                    <div className="flex-1 p-[60px] flex flex-col justify-between relative overflow-hidden group/branding border-r border-border">
-                        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 blur-[120px] -translate-y-1/2 translate-x-1/2 rounded-full" />
-
-                        <div className="relative z-10 h-full flex flex-col items-start text-left">
-                            <div className="flex items-center justify-between w-full mb-12">
-                                <Link href="/" className="flex items-center gap-5 group/logo">
-                                    <div className="w-14 h-14 bg-background dark:bg-black rounded-2xl flex items-center justify-center border border-border group-hover/logo:border-primary/50 transition-all shadow-premium relative overflow-hidden text-foreground italic font-black">
-                                        <img src="https://res.cloudinary.com/dpfapm0tl/image/upload/v1770163492/icon_x6kgnr.png" alt="Logo" className="w-8 h-8 object-contain" />
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <h1 className="text-2xl font-black tracking-tighter text-foreground uppercase italic leading-none">
-                                            Indeed<span className="text-primary not-italic">Bot</span>
-                                        </h1>
-                                        <span className="text-[10px] font-bold tracking-[0.4em] text-neutral-500 uppercase mt-2">Member Portal</span>
-                                    </div>
-                                </Link>
-
-                                <div className="flex items-center gap-4">
-                                    <ThemeToggle />
-                                </div>
+                {/* Mobile top bar */}
+                {isNarrow && (
+                    <div className="flex items-center justify-between p-6 relative z-10 border-b border-border/50">
+                        <Link href="/" className="flex items-center gap-3 group">
+                            <div className="w-10 h-10 bg-background rounded-xl flex items-center justify-center border border-border shadow-sm">
+                                <img
+                                    src="https://res.cloudinary.com/dpfapm0tl/image/upload/v1770163492/icon_x6kgnr.png"
+                                    alt="IndeedBot"
+                                    className="w-6 h-6 object-contain"
+                                />
                             </div>
-
-                            <div className="space-y-6 my-auto">
-                                <div className="inline-flex items-center gap-3 px-4 py-2 bg-primary/5 border border-primary/20 rounded-xl">
-                                    <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                                    <span className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">Secure Access Link</span>
-                                </div>
-
-                                <h2 className="text-[100px] font-black leading-[0.85] tracking-tighter text-foreground uppercase italic drop-shadow-sm">
-                                    READY TO <br />
-                                    <span className="text-primary not-italic">WIN?</span>
-                                </h2>
-
-                                <p className="text-neutral-500 text-xl font-medium max-w-lg leading-relaxed italic border-l-4 border-primary pl-8 mt-12">
-                                    Join the elite professionals using AI to navigate the job market with total precision.
-                                </p>
-                            </div>
-
-                            <div className="grid grid-cols-2 gap-6 w-full pt-10 border-t border-border mt-auto">
-                                <CapabilityCard title="Global Access" desc="Use anywhere, anytime" />
-                                <CapabilityCard title="Top Priority" desc="AI-first career tools" />
-                            </div>
+                            <span className="text-lg font-black tracking-tighter text-foreground uppercase italic">
+                                Indeed<span className="text-primary not-italic">Bot</span>
+                            </span>
+                        </Link>
+                        <div className="flex items-center gap-2">
+                            <Link
+                                href="/"
+                                className="w-10 h-10 flex items-center justify-center rounded-xl glass border border-border text-neutral-500 hover:text-foreground transition-all"
+                            >
+                                <ArrowLeft className="w-4 h-4" />
+                            </Link>
+                            <ThemeToggle />
                         </div>
                     </div>
                 )}
 
-                {/* --- RIGHT SECTOR: FORMS --- */}
-                <div className={`${isNarrow ? 'w-full' : 'w-[550px]'} bg-background/50 flex flex-col items-center justify-center relative overflow-hidden`}>
-                    <div className="absolute inset-0 bg-primary/[0.02] pointer-events-none" />
-
-                    <div className="flex-1 w-full flex flex-col items-center justify-center p-12 relative z-10">
-                        {/* THE TOGGLE */}
-                        <div className="mb-12 flex bg-background border border-border p-1.5 rounded-2xl shadow-xl relative z-20">
+                {/* Form Container */}
+                <div className="flex-1 flex flex-col items-center justify-center px-10 xl:px-14 relative z-10">
+                    {/* Auth Toggle */}
+                    <div className="mb-10 w-full max-w-[400px]">
+                        <div className="flex bg-foreground/[0.08] dark:bg-foreground/[0.03] border border-border p-1 rounded-2xl relative">
+                            {/* Sliding background pill */}
+                            <motion.div
+                                className="absolute top-1 bottom-1 w-[calc(50%-4px)] bg-primary rounded-xl shadow-glow-primary"
+                                initial={false}
+                                animate={{ x: isSignIn ? 0 : "calc(100% + 4px)" }}
+                                transition={{ type: "spring", stiffness: 450, damping: 35 }}
+                            />
                             <Link
                                 href={signInHref}
-                                className={`px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-[0.3em] transition-all duration-300 min-w-[140px] text-center ${pathname.includes('sign-in') ? 'bg-primary text-white shadow-glow-primary' : 'text-neutral-500 hover:text-foreground'}`}
+                                className={`relative z-10 flex-1 py-3.5 rounded-xl text-[10px] font-black uppercase tracking-[0.3em] transition-all duration-300 text-center ${isSignIn ? "text-white" : "text-neutral-600 dark:text-neutral-400 hover:text-foreground"}`}
                             >
                                 Sign In
                             </Link>
                             <Link
                                 href={signUpHref}
-                                className={`px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-[0.3em] transition-all duration-300 min-w-[140px] text-center ${pathname.includes('sign-up') ? 'bg-primary text-white shadow-glow-primary' : 'text-neutral-500 hover:text-foreground'}`}
+                                className={`relative z-10 flex-1 py-3.5 rounded-xl text-[10px] font-black uppercase tracking-[0.3em] transition-all duration-300 text-center ${!isSignIn ? "text-white" : "text-neutral-600 dark:text-neutral-400 hover:text-foreground"}`}
                             >
                                 Register
                             </Link>
                         </div>
-
-                        {/* FORM AREA */}
-                        <div className="w-full max-w-[420px] flex flex-col items-center justify-center transform-gpu">
-                            {children}
-                        </div>
                     </div>
 
-                    <div className="w-full p-10 border-t border-border flex flex-col items-center gap-3 bg-foreground/[0.02]">
-                        <div className="flex items-center gap-3 px-5 py-2 glass rounded-full opacity-60">
-                            <Lock className="w-3 h-3 text-primary" />
-                            <span className="text-[9px] font-black tracking-[0.3em] uppercase text-foreground">Secure Connection</span>
-                        </div>
-                        <span className="text-[8px] font-bold text-neutral-400 uppercase tracking-widest">© 2026 INDEEDBOT SYSTEMS</span>
+                    <div className="w-full max-w-[400px]">
+                        {children}
                     </div>
                 </div>
+
+                {/* Bottom Security Footer */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.8, duration: 0.8 }}
+                    className="p-8 flex flex-col items-center gap-4 relative z-10 border-t border-border/50 bg-foreground/[0.01]"
+                >
+                    <div className="flex items-center gap-6 text-neutral-500">
+                        <div className="flex items-center gap-2">
+                            <Shield className="w-3.5 h-3.5 text-primary/70" />
+                            <span className="text-[9px] font-black uppercase tracking-[0.25em]">End-to-End Encrypted</span>
+                        </div>
+                        <div className="w-px h-3 bg-border" />
+                        <div className="flex items-center gap-2">
+                            <Lock className="w-3.5 h-3.5 text-primary/70" />
+                            <span className="text-[9px] font-black uppercase tracking-[0.25em]">SOC 2 Compliant</span>
+                        </div>
+                    </div>
+                    <span className="text-[10px] font-bold text-neutral-600 dark:text-neutral-500 italic tracking-[0.3em]">
+                        © 2026 IndeedBot · Career Intelligence Infrastructure
+                    </span>
+                </motion.div>
             </motion.div>
         </div>
     );
 };
-
-const HUDOverlay = ({ resolution, isNarrow }: { resolution: { w: number, h: number }, isNarrow: boolean }) => (
-    <div className="absolute inset-0 pointer-events-none z-50 overflow-hidden opacity-30">
-        <div className="absolute top-8 left-8 w-12 h-12 border-t-2 border-l-2 border-border rounded-tl-xl" />
-        <div className="absolute top-8 right-8 w-12 h-12 border-t-2 border-r-2 border-border rounded-tr-xl" />
-        <div className="absolute bottom-8 left-8 w-12 h-12 border-b-2 border-l-2 border-border rounded-bl-xl" />
-        <div className="absolute bottom-8 right-8 w-12 h-12 border-b-2 border-r-2 border-border rounded-br-xl" />
-    </div>
-);
-
-const CapabilityCard = ({ title, desc }: { title: string, desc: string }) => (
-    <div className="flex flex-col gap-1 p-4 rounded-xl border border-border bg-foreground/[0.01]">
-        <span className="text-[12px] font-black text-foreground uppercase tracking-tighter">{title}</span>
-        <span className="text-[10px] font-bold text-neutral-500 italic">{desc}</span>
-    </div>
-);
