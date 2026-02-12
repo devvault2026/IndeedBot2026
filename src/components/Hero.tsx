@@ -1,191 +1,252 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ChevronRight, Target, Zap, ShieldCheck, Search, Activity, Cpu, ShieldAlert } from "lucide-react";
+import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
+import { Chrome, Play, ShieldCheck, Zap, Sparkles, TrendingUp, Briefcase, Terminal, Search, UserCheck, CheckCircle2, ArrowRight } from "lucide-react";
+import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 
+const AI_STEPS = [
+    "Scanning Job Post...",
+    "Finding Hidden Salary...",
+    "Matching Keywords...",
+    "Optimizing Bullet Points...",
+    "Checking ATS Score...",
+    "Ready for Application."
+];
+
 export const Hero = () => {
+    const containerRef = useRef(null);
+    const [step, setStep] = useState(0);
+
+    // 3D Tilt Effect State
+    const x = useMotionValue(0);
+    const y = useMotionValue(0);
+
+    // Smooth spring animation for the tilt
+    const mouseX = useSpring(x, { stiffness: 150, damping: 15 });
+    const mouseY = useSpring(y, { stiffness: 150, damping: 15 });
+
+    function handleMouseMove({ currentTarget, clientX, clientY }: any) {
+        const { left, top, width, height } = currentTarget.getBoundingClientRect();
+        const xPct = (clientX - left) / width - 0.5;
+        const yPct = (clientY - top) / height - 0.5;
+        x.set(xPct);
+        y.set(yPct);
+    }
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setStep((prev) => (prev + 1) % AI_STEPS.length);
+        }, 2500);
+        return () => clearInterval(timer);
+    }, []);
+
     return (
-        <section className="relative min-h-[90vh] flex flex-col items-center justify-center pt-24 md:pt-32 pb-20 md:pb-32 px-4 overflow-hidden bg-white">
-            {/* Background Decorative Gradient */}
-            <div className="absolute top-0 inset-x-0 h-[800px] bg-gradient-to-b from-neutral-50 to-transparent -z-10" />
+        <section ref={containerRef} className="relative min-h-screen flex items-center justify-center pt-32 pb-24 overflow-hidden bg-background selection:bg-primary/30">
+            {/* --- ULTRA-PREMIUM ATMOSPHERE --- */}
+            <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+                {/* Main Spotlight */}
+                <div className="absolute top-[-20%] left-[20%] w-[60%] h-[60%] bg-primary/20 blur-[180px] rounded-full animate-pulse opacity-40 mix-blend-screen" />
+                <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-blue-600/10 blur-[150px] rounded-full animate-pulse opacity-30" />
 
-            <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="text-center max-w-5xl mx-auto z-10 mb-16"
-            >
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-primary/10 bg-primary/5 text-primary text-[10px] md:text-xs font-black mb-6 md:mb-8 shadow-sm tracking-widest uppercase whitespace-nowrap overflow-hidden text-ellipsis max-w-full">
-                    <ShieldCheck className="w-3 h-3 md:w-4 md:h-4 animate-pulse flex-shrink-0" />
-                    <span className="truncate">Enterprise-Grade Decision Systems</span>
-                </div>
+                {/* Dynamic Grid */}
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)] bg-[size:60px_60px] [mask_image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-20" />
 
-                <h1 className="text-4xl sm:text-5xl md:text-8xl font-black tracking-tight mb-6 md:mb-8 leading-[0.95] text-[#2d2d2d] uppercase italic break-words">
-                    AI Career Intelligence <br className="hidden md:block" />
-                    <span className="text-gradient-indeed not-italic block md:inline">Infrastructure.</span>
-                </h1>
+                {/* Noise Texture */}
+                <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] mix-blend-overlay" />
+            </div>
 
-                <p className="text-base md:text-2xl text-neutral-500 max-w-3xl mx-auto mb-8 md:mb-12 leading-relaxed font-medium px-2">
-                    IndeedBot 2026 operates as a multi-agent decision system that analyzes market demand,
-                    candidate positioning, and opportunity risk in real time—before you ever apply.
-                </p>
+            <div className="container mx-auto px-6 relative z-10">
+                <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
 
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-5 w-full">
-                    <Link href="#pricing" className="w-full sm:w-auto">
-                        <button className="w-full sm:w-auto px-6 md:px-12 py-4 md:py-5 bg-primary text-white font-black text-lg md:text-xl rounded-xl hover:bg-indeed-blue-hover hover:scale-[1.02] transition-all shadow-xl shadow-primary/20 flex items-center justify-center gap-3">
-                            INITIALIZE SYSTEM <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
-                        </button>
-                    </Link>
-
-                    <Link href="#features" className="w-full sm:w-auto">
-                        <button className="w-full sm:w-auto px-6 md:px-12 py-4 md:py-5 bg-white text-[#2d2d2d] font-bold text-lg md:text-xl rounded-xl border-2 border-neutral-200 hover:border-primary/30 transition-all flex items-center justify-center gap-3">
-                            REVIEW PROTOCOL
-                        </button>
-                    </Link>
-                </div>
-
-                <div className="mt-10 md:mt-12 flex flex-wrap items-center justify-center gap-4 md:gap-8 text-[#2d2d2d] font-black text-[9px] md:text-[10px] tracking-[2px] md:tracking-[4px] uppercase italic opacity-80 max-w-sm md:max-w-none mx-auto">
-                    <span className="flex items-center gap-2"><ShieldCheck className="w-3 h-3 md:w-4 md:h-4 text-primary" /> POST-READY</span>
-                    <span className="flex items-center gap-2"><Cpu className="w-3 h-3 md:w-4 md:h-4 text-primary" /> CLIENT-SIDE</span>
-                    <span className="flex items-center gap-2"><Target className="w-3 h-3 md:w-4 md:h-4 text-primary" /> DECISION ARCH.</span>
-                </div>
-            </motion.div>
-
-            {/* THE LIVE SCANNER UI */}
-            <motion.div
-                initial={{ opacity: 0, y: 60 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 1 }}
-                className="w-full max-w-6xl mx-auto relative group px-2 md:px-4 mb-20"
-            >
-                <div className="bg-neutral-100 p-1 md:p-3 rounded-[2rem] md:rounded-[3rem] border border-neutral-200 shadow-2xl relative">
-                    {/* The "Indeed" Page Background */}
-                    <div className="bg-white rounded-[1.5rem] md:rounded-[2.5rem] p-4 md:p-16 min-h-0 md:min-h-[500px] relative border border-neutral-200 overflow-hidden flex flex-col items-center justify-center">
-
-                        {/* Desktop Skeletons - Hidden on Mobile */}
-                        <div className="hidden md:block max-w-3xl w-full space-y-8 opacity-40 grayscale pointer-events-none absolute top-16 left-16 right-[380px]">
-                            <div className="w-48 h-10 bg-neutral-200 rounded" />
-                            <div className="space-y-4">
-                                <div className="w-full h-32 bg-neutral-100 rounded-2xl p-6 border border-neutral-200">
-                                    <div className="w-1/3 h-6 bg-neutral-200 rounded mb-4" />
-                                    <div className="w-1/4 h-4 bg-neutral-100 rounded" />
-                                </div>
-                                <div className="w-full h-32 bg-white rounded-2xl p-6 border-2 border-primary/20 relative overflow-hidden shadow-lg">
-                                    <div className="w-1/2 h-6 bg-neutral-200 rounded mb-4" />
-                                    <div className="w-1/3 h-4 bg-neutral-100 rounded" />
-                                    <div className="absolute top-4 right-4 w-12 h-12 rounded-lg bg-neutral-100" />
-                                </div>
-                                <div className="w-full h-32 bg-neutral-100 rounded-2xl p-6 border border-neutral-200">
-                                    <div className="w-1/3 h-6 bg-neutral-200 rounded mb-4" />
-                                    <div className="w-1/4 h-4 bg-neutral-100 rounded" />
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* THE INDEED BOT SIDE PANEL (THE REVELATION) */}
+                    {/* --- LEFT: DOMINANT TYPOGRAPHY --- */}
+                    <div className="relative z-20">
+                        {/* Status Badge */}
                         <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-border bg-background/50 backdrop-blur-md mb-10 shadow-lg group hover:border-primary/30 transition-colors cursor-default"
+                        >
+                            <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                            </span>
+                            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/60 group-hover:text-foreground transition-colors">
+                                System Operational
+                            </span>
+                            <div className="w-px h-3 bg-border" />
+                            <span className="text-[10px] font-bold text-primary">V1.0.0 RELEASE</span>
+                        </motion.div>
+
+                        {/* MASSIVE HEADLINE */}
+                        <motion.h1
                             initial={{ opacity: 0, y: 40 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.8, duration: 0.8, ease: "easeOut" }}
-                            className="relative md:absolute md:top-4 md:right-4 md:bottom-4 w-full md:w-[340px] bg-[#0c0c0e] rounded-2xl md:rounded-[2rem] shadow-2xl z-20 border border-white/10 overflow-hidden flex flex-col"
+                            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                            className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter text-foreground mb-8 leading-[0.85] uppercase italic"
                         >
-                            {/* Bot Header */}
-                            <div className="p-4 md:p-6 border-b border-white/5 bg-primary/5">
-                                <div className="flex items-center justify-between mb-4">
-                                    <div className="flex items-center gap-2">
-                                        <img
-                                            src="https://res.cloudinary.com/dpfapm0tl/image/upload/v1770163492/icon_x6kgnr.png"
-                                            alt="IndeedBot Logo"
-                                            className="w-5 h-5 md:w-6 md:h-6 object-contain"
-                                        />
-                                        <span className="text-white font-black text-xs tracking-widest italic uppercase">Bot Intelligence</span>
-                                    </div>
-                                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                                </div>
-                                <p className="text-[10px] text-neutral-500 font-bold uppercase tracking-widest">Analysis Status: <span className="text-primary italic">Analyzing Card</span></p>
-                            </div>
+                            Win the <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-primary to-indigo-600 relative">
+                                Job.
+                                <svg className="absolute w-full h-3 -bottom-1 left-0 text-primary opacity-40" viewBox="0 0 100 10" preserveAspectRatio="none">
+                                    <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="2" fill="none" />
+                                </svg>
+                            </span>
+                        </motion.h1>
 
-                            {/* Scanning Animation Body */}
-                            <div className="flex-1 p-4 md:p-6 space-y-4 md:space-y-6 relative overflow-hidden">
-                                {/* The Wave Analysis */}
-                                <div className="h-20 md:h-24 bg-primary/5 border border-primary/20 rounded-xl relative overflow-hidden">
-                                    <motion.div
-                                        animate={{ x: ["-100%", "100%"] }}
-                                        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                                        className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent"
-                                    />
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                        <Activity className="w-10 h-10 md:w-12 md:h-12 text-primary opacity-50" />
-                                    </div>
-                                </div>
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                            className="text-xl md:text-2xl text-neutral-500 font-medium leading-relaxed mb-12 max-w-xl"
+                        >
+                            Stop applying into the void. Use the AI agent that rewrites your resume, finds hidden salaries, and fast-tracks you to the interview.
+                        </motion.p>
 
-                                {/* Extracted Intel */}
-                                <div className="space-y-2 md:space-y-3">
-                                    <div className="flex justify-between items-center text-[10px] font-black uppercase text-neutral-500 tracking-widest mb-1">
-                                        <span>Extracted Data</span>
-                                        <span className="text-primary">98% Parity</span>
-                                    </div>
-                                    {[
-                                        { label: "Salary Cap", value: "$185k - $220k", scout: "VERIFIED" },
-                                        { label: "ATS Match", value: "A+ High Probability", scout: "OPTIMIZED" },
-                                        { label: "Risk Assessment", value: "Low Institutional Signal", scout: "SHIELD_ALERT" },
-                                        { label: "Strategic Fit", value: "88% Career Match", scout: "CALCULATED" }
-                                    ].map((item, i) => (
-                                        <motion.div
-                                            key={i}
-                                            initial={{ opacity: 0, x: 20 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: 1.2 + (i * 0.2) }}
-                                            className={`p-2 md:p-3 border rounded-lg flex justify-between items-center ${item.scout === 'SHIELD_ALERT' ? 'bg-red-500/10 border-red-500/20' : 'bg-white/5 border-white/5'}`}
-                                        >
-                                            <div>
-                                                <p className={`text-[8px] uppercase font-black tracking-widest ${item.scout === 'SHIELD_ALERT' ? 'text-red-400' : 'text-neutral-500'}`}>{item.label}</p>
-                                                <p className="text-[10px] md:text-xs text-white font-bold">{item.value}</p>
-                                            </div>
-                                            <span className={`text-[8px] font-black italic ${item.scout === 'SHIELD_ALERT' ? 'text-red-500' : 'text-primary'}`}>{item.scout}</span>
-                                        </motion.div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Tactical Action */}
-                            <div className="p-4 md:p-6 bg-primary/10 border-t border-white/5">
-                                <button className="w-full py-3 md:py-4 bg-primary text-white font-black text-xs md:text-sm rounded-xl shadow-lg ring-4 ring-primary/20 hover:scale-105 transition-all uppercase tracking-widest">
-                                    Initialize Protocol
-                                </button>
-                            </div>
-                        </motion.div>
-
-                        {/* THE SCANNING LASER EFFECT - Desktop Only */}
                         <motion.div
-                            animate={{ top: ["20%", "60%", "20%"] }}
-                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                            className="hidden md:block absolute left-8 right-[360px] h-1 bg-gradient-to-r from-transparent via-primary to-transparent z-10 shadow-[0_0_20px_rgba(37,87,167,0.8)]"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.3 }}
+                            className="flex flex-col sm:flex-row items-stretch gap-6"
                         >
-                            <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-primary text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-tighter">
-                                Scanning Intelligence Profile
-                            </div>
+                            <Link href="/sign-up" className="group">
+                                <button className="relative w-full sm:w-auto px-10 py-6 bg-foreground text-background font-black text-sm rounded-2xl flex items-center justify-center gap-4 transition-all hover:scale-[1.02] active:scale-95 shadow-2xl hover:shadow-glow-primary overflow-hidden uppercase tracking-widest">
+                                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                                    <Chrome className="w-5 h-5" />
+                                    Add to Chrome — Free
+                                </button>
+                            </Link>
+
+                            <button className="px-10 py-6 glass text-foreground font-black text-xs rounded-2xl border border-border hover:bg-foreground/5 transition-all flex items-center justify-center gap-3 uppercase tracking-widest group">
+                                <Play className="w-4 h-4 fill-foreground group-hover:text-primary group-hover:fill-primary transition-colors" />
+                                View Demo
+                            </button>
                         </motion.div>
 
-                        {/* Ghost Data Fragments */}
-                        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-20">
-                            <Target className="w-48 h-48 md:w-64 md:h-64 text-neutral-200 animate-spin" style={{ animationDuration: '20s' }} />
+                        <div className="mt-16 flex items-center gap-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+                            {[
+                                { icon: ShieldCheck, text: "Data Encrypted" },
+                                { icon: CheckCircle2, text: "Chrome Verified" },
+                                { icon: UserCheck, text: "4.9/5 Rating" }
+                            ].map((item, i) => (
+                                <div key={i} className="flex items-center gap-3">
+                                    <item.icon className="w-5 h-5 text-primary" />
+                                    <span className="text-[10px] font-black uppercase tracking-widest text-foreground">{item.text}</span>
+                                </div>
+                            ))}
                         </div>
                     </div>
-                </div>
 
-                {/* Floating Product Badge */}
-                <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-[#2d2d2d] text-white px-6 md:px-10 py-3 md:py-5 rounded-xl md:rounded-2xl shadow-2xl border-4 border-white flex items-center gap-3 md:gap-4 w-[90%] md:w-auto mx-auto justify-center z-30">
-                    <div className="w-8 h-8 md:w-10 md:h-10 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
-                        <Zap className="w-4 h-4 md:w-6 md:h-6 fill-white" />
-                    </div>
-                    <div>
-                        <p className="text-[8px] md:text-[10px] font-black uppercase tracking-widest text-neutral-400">Official Release</p>
-                        <p className="text-sm md:text-lg font-black italic whitespace-nowrap">IndeedBot v4.0.0 <span className="text-primary">E2E</span></p>
-                    </div>
+                    {/* --- RIGHT: 3D INTERACTIVE DASHBOARD --- */}
+                    <motion.div
+                        initial={{ opacity: 0, x: 50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 1, delay: 0.4, ease: "backOut" }}
+                        className="relative hidden lg:block h-[700px] w-full"
+                        onMouseMove={handleMouseMove}
+                    >
+                        <motion.div
+                            style={{
+                                rotateX: mouseY,
+                                rotateY: mouseX,
+                                transformStyle: "preserve-3d"
+                            }}
+                            className="relative w-full h-full flex items-center justify-center perspective-[2000px]"
+                        >
+                            {/* Main Floating Card */}
+                            <div className="relative w-[500px] bg-background/80 backdrop-blur-3xl rounded-[2.5rem] border border-border shadow-premium overflow-hidden z-20 group">
+
+                                {/* Inner Content */}
+                                <div className="p-8 relative z-10">
+                                    {/* Header */}
+                                    <div className="flex justify-between items-center mb-10">
+                                        <div className="flex items-center gap-4">
+                                            <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center border border-primary/20">
+                                                <Zap className="w-6 h-6 text-primary" />
+                                            </div>
+                                            <div>
+                                                <div className="text-xs font-black uppercase text-foreground">Job Architect</div>
+                                                <div className="text-[10px] text-neutral-500 font-mono">Running Analysis...</div>
+                                            </div>
+                                        </div>
+                                        <div className="px-3 py-1 bg-green-500/10 border border-green-500/20 rounded-full text-[10px] font-black text-green-500 uppercase tracking-wider animate-pulse">
+                                            Online
+                                        </div>
+                                    </div>
+
+                                    {/* Circular Progress */}
+                                    <div className="flex justify-center mb-12 relative">
+                                        <div className="relative w-48 h-48 flex items-center justify-center">
+                                            <svg className="w-full h-full transform -rotate-90">
+                                                <circle cx="96" cy="96" r="88" stroke="currentColor" strokeWidth="12" fill="transparent" className="text-border" />
+                                                <motion.circle
+                                                    initial={{ strokeDasharray: "553", strokeDashoffset: "553" }}
+                                                    animate={{ strokeDashoffset: "110" }}
+                                                    transition={{ duration: 2, delay: 1, ease: "easeOut" }}
+                                                    cx="96" cy="96" r="88"
+                                                    stroke="currentColor" strokeWidth="12"
+                                                    fill="transparent"
+                                                    className="text-primary drop-shadow-[0_0_15px_rgba(37,87,167,0.5)]"
+                                                    strokeLinecap="round"
+                                                />
+                                            </svg>
+                                            <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+                                                <span className="text-5xl font-black text-foreground italic tracking-tighter">94%</span>
+                                                <span className="text-[10px] uppercase font-bold text-neutral-500 tracking-widest mt-1">Match Rate</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Scan Feed */}
+                                    <div className="bg-neutral-900/50 rounded-2xl border border-white/5 p-5 relative overflow-hidden h-[160px]">
+                                        <div className="space-y-3 relative z-10">
+                                            {AI_STEPS.map((s, i) => (
+                                                <motion.div
+                                                    key={i}
+                                                    animate={{ opacity: i === step ? 1 : 0.3 }}
+                                                    className="flex items-center gap-3"
+                                                >
+                                                    <div className={`w-1.5 h-1.5 rounded-full ${i === step ? 'bg-primary shadow-[0_0_10px_#2557a7]' : 'bg-neutral-700'}`} />
+                                                    <span className={`text-[11px] font-mono ${i === step ? 'text-white font-bold' : 'text-neutral-500'}`}>{s}</span>
+                                                </motion.div>
+                                            ))}
+                                        </div>
+                                        {/* Scanner Line */}
+                                        <motion.div
+                                            animate={{ top: ["0%", "100%"] }}
+                                            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                                            className="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent blur-[2px] pointer-events-none"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Floating Elements (Parallax) */}
+                            <motion.div
+                                style={{ x: useTransform(mouseX, [-0.5, 0.5], [-30, 30]), y: useTransform(mouseY, [-0.5, 0.5], [-30, 30]), z: 50 }}
+                                className="absolute -right-10 top-20 bg-background/90 p-5 rounded-3xl border border-border shadow-2xl backdrop-blur-md"
+                            >
+                                <div className="flex items-center gap-3 mb-2">
+                                    <Briefcase className="w-4 h-4 text-purple-500" />
+                                    <span className="text-[10px] font-black uppercase text-foreground">Target Role</span>
+                                </div>
+                                <div className="text-lg font-black text-foreground italic">Product Lead</div>
+                            </motion.div>
+
+                            <motion.div
+                                style={{ x: useTransform(mouseX, [-0.5, 0.5], [30, -30]), y: useTransform(mouseY, [-0.5, 0.5], [30, -30]), z: 100 }}
+                                className="absolute -left-10 bottom-32 bg-background/90 p-5 rounded-3xl border border-border shadow-2xl backdrop-blur-md"
+                            >
+                                <div className="flex items-center gap-3 mb-2">
+                                    <TrendingUp className="w-4 h-4 text-green-500" />
+                                    <span className="text-[10px] font-black uppercase text-foreground">Salary Delta</span>
+                                </div>
+                                <div className="text-xl font-black text-green-500 italic">+$42,000</div>
+                            </motion.div>
+                        </motion.div>
+                    </motion.div>
                 </div>
-            </motion.div>
+            </div>
         </section>
     );
 };

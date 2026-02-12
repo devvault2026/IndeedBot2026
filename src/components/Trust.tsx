@@ -1,63 +1,77 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShieldCheck, Lock, Globe, EyeOff, Activity } from "lucide-react";
+import { ShieldCheck, Lock, EyeOff, UserCheck, HardDrive, Share2, Key, Settings } from "lucide-react";
 
 const trustFactors = [
     {
-        title: "Client-Side Encryption",
-        description: "All sensitive candidate data, including dossiers and API keys, are stored exclusively in your local browser sandbox. We have zero eyes on your personal history.",
-        icon: Lock
+        title: "Your data stays in your browser",
+        description: "Everything IndeedBot analyzes stays on your machine. We don't store your resume or personal data on our servers.",
+        icon: HardDrive,
+        color: "text-blue-400"
     },
     {
-        title: "Zero Resale Guarantee",
-        description: "IndeedBot 2026 is an adversarial agent for the candidate. We do not sell resumes, track identities, or use your data to train multi-tenant models.",
-        icon: EyeOff
+        title: "We don’t sell your data",
+        description: "Our business model is simple: we sell career tools, not your identity. Your candidate profile is never for sale.",
+        icon: Share2,
+        color: "text-purple-400"
     },
     {
-        title: "Regional Residency",
-        description: "Data remains within your legal jurisdiction. Our architecture complies with GDPR, PIPEDA, and CCPA standards for institutional-grade reliability.",
-        icon: Globe
+        title: "We don’t access your accounts",
+        description: "IndeedBot works as an overlay. It never asks for your login credentials or gains access to your private accounts.",
+        icon: Key,
+        color: "text-orange-400"
     },
     {
-        title: "Least-Privilege Agent Design",
-        description: "Our multi-agent swarm operates on a strict need-to-know basis. Engines only access the job context required for the specific decision being made.",
-        icon: Activity
+        title: "You control everything",
+        description: "Enable or disable features with one click. You have full sovereignty over how and when the AI assists you.",
+        icon: Settings,
+        color: "text-green-400"
     }
 ];
 
 export const Trust = () => {
     return (
-        <section className="py-16 md:py-32 px-4 bg-white border-y border-neutral-100 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -mr-48 -mt-48" />
+        <section id="privacy" className="py-24 md:py-48 px-4 bg-background border-y border-border relative overflow-hidden">
+            {/* Soft Ambient Glow */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
 
-            <div className="max-w-6xl mx-auto">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
+            <div className="container mx-auto relative z-10">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-32 items-center">
                     <div>
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-50 text-green-600 text-[9px] md:text-[10px] font-black uppercase mb-6 md:mb-8 tracking-[2px]">
-                            <ShieldCheck className="w-3 h-3 fill-green-600" />
-                            <span>Institutional Status: SOC 2 Compliant</span>
-                        </div>
-                        <h2 className="text-3xl md:text-5xl font-black italic mb-6 md:mb-8 text-[#2d2d2d] uppercase tracking-tighter leading-none">
-                            Enterprise-Grade <br />
-                            <span className="text-primary not-italic">Security & Privacy.</span>
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8 border-primary/20"
+                        >
+                            <ShieldCheck className="w-4 h-4 text-primary" />
+                            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-neutral-400">Privacy First Architecture</span>
+                        </motion.div>
+
+                        <h2 className="text-5xl md:text-8xl font-black italic mb-8 text-foreground uppercase tracking-tighter leading-none">
+                            BUILT TO PROTECT <br />
+                            <span className="text-gradient-blue not-italic">YOUR PRIVACY.</span>
                         </h2>
-                        <p className="text-base md:text-lg text-neutral-500 font-medium leading-relaxed mb-8 md:mb-10 max-w-xl">
-                            IndeedBot 2026 is built with the same security assumptions as financial and healthcare systems.
-                            We prioritize institutional validation over consumer tracking.
+
+                        <p className="text-xl text-neutral-400 font-medium leading-relaxed mb-12 max-w-xl italic">
+                            People fear installing extensions. We built IndeedBot with a
+                            Zero-Trust philosophy because your career data is sacred.
+                            No tracking. No backdoors. No compromise.
                         </p>
 
                         <div className="space-y-4">
-                            <div className="flex items-center gap-4 p-4 rounded-2xl bg-neutral-50 border border-neutral-100">
-                                <div className="w-10 h-10 bg-white rounded-xl shadow-sm flex items-center justify-center text-primary">
-                                    <ShieldCheck className="w-6 h-6" />
+                            <div className="flex items-center gap-5 p-6 rounded-[2.5rem] glass border-border group hover:border-primary/30 transition-all shadow-premium">
+                                <div className="w-12 h-12 glass rounded-2xl flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                                    <UserCheck className="w-6 h-6" />
                                 </div>
-                                <span className="text-xs md:text-sm font-bold text-[#2d2d2d] uppercase italic">Continuous Monitoring & Anomaly Detection</span>
+                                <span className="text-lg font-black text-foreground uppercase italic tracking-widest">
+                                    Chrome Verified Security
+                                </span>
                             </div>
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
                         {trustFactors.map((factor, i) => (
                             <motion.div
                                 key={i}
@@ -65,11 +79,13 @@ export const Trust = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ delay: i * 0.1 }}
                                 viewport={{ once: true }}
-                                className="p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] bg-neutral-50 border border-neutral-100 hover:border-primary/20 transition-all group"
+                                className="p-8 rounded-[3rem] glass border-border hover:bg-foreground/5 transition-all group relative overflow-hidden shadow-premium"
                             >
-                                <factor.icon className="w-6 h-6 md:w-8 md:h-8 text-primary mb-4 md:mb-6 group-hover:scale-110 transition-transform" />
-                                <h4 className="text-xs md:text-sm font-black text-[#2d2d2d] uppercase mb-3 md:mb-4 tracking-tight">{factor.title}</h4>
-                                <p className="text-[10px] md:text-xs text-neutral-500 font-medium leading-relaxed">{factor.description}</p>
+                                <div className={`w-12 h-12 rounded-xl bg-foreground/5 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform ${factor.color}`}>
+                                    <factor.icon className="w-6 h-6" />
+                                </div>
+                                <h4 className="text-lg font-black text-foreground uppercase mb-4 tracking-tighter italic">{factor.title}</h4>
+                                <p className="text-sm text-neutral-500 font-medium leading-relaxed italic">{factor.description}</p>
                             </motion.div>
                         ))}
                     </div>

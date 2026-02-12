@@ -29,9 +29,12 @@ export const metadata: Metadata = {
   },
   keywords: ["IndeedBot", "AI Job Search", "Career Intelligence", "ATS Bypass", "Automated Job Application", "Salary Verification", "Career Optimization 2026"],
   icons: {
-    icon: "https://res.cloudinary.com/dpfapm0tl/image/upload/v1770747446/ChatGPT_Image_Feb_10_2026_01_12_57_PM_fwhgmd.png",
+    icon: "/favicon.png",
   },
 };
+
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { ClerkProvider } from "@clerk/nextjs";
 
 export default function RootLayout({
   children,
@@ -39,12 +42,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

@@ -1,51 +1,105 @@
+"use client";
+
 import { Navbar } from "@/components/Navbar";
-import Link from "next/link";
 import { Hero } from "@/components/Hero";
+import { SocialProof } from "@/components/SocialProof";
 import { Trailer } from "@/components/Trailer";
+import { PainSection } from "@/components/PainSection";
+import { AI_CareerTeam } from "@/components/DecisionFlow";
 import { Features } from "@/components/Features";
-import { Pricing } from "@/components/Pricing";
-import { IntelligenceFeed } from "@/components/IntelligenceFeed";
-import { ResumeArchitect } from "@/components/ResumeArchitect";
 import { Trust } from "@/components/Trust";
-import { DecisionFlow } from "@/components/DecisionFlow";
 import { ResponsibleAI } from "@/components/ResponsibleAI";
+import { Pricing } from "@/components/Pricing";
 import { Footer } from "@/components/Footer";
-import { ShieldCheck, ArrowRight, MousePointer2 } from "lucide-react";
+import { ArrowRight, Chrome, Zap } from "lucide-react";
+import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-white text-[#2d2d2d] antialiased">
+    <main className="min-h-screen bg-background text-foreground antialiased selection:bg-primary/30 selection:text-white">
       <Navbar />
+
+      {/* SECTION 1: HERO */}
       <Hero />
+
+      {/* SECTION 2: SOCIAL PROOF */}
+      <SocialProof />
+
+      {/* SECTION 3: VIDEO DEMO */}
       <Trailer />
+
+      {/* SECTION 4: THE PAIN */}
+      <PainSection />
+
+      {/* SECTION 5: THE PRODUCT STORY */}
+      <AI_CareerTeam />
+
+      {/* SECTION 6: FEATURE DEMO BLOCK */}
       <Features />
-      <DecisionFlow />
-      <IntelligenceFeed />
-      <ResumeArchitect />
+
+      {/* SECTION 7: TRUST & PRIVACY */}
       <Trust />
+
+      {/* OPTIONAL: ETHICAL AI SECTION */}
       <ResponsibleAI />
+
+      {/* SECTION 8: PRICING */}
       <Pricing />
 
-      {/* Strategic Success CTA */}
-      <section className="py-20 md:py-40 px-4 bg-white relative overflow-hidden flex flex-col items-center">
-        <div className="absolute inset-0 opacity-[0.02] pointer-events-none -z-10"
-          style={{ backgroundImage: 'radial-gradient(#2557a7 1px, transparent 1px)', backgroundSize: '20px 20px' }}>
-        </div>
+      {/* SECTION 9: FINAL CTA - THE STRATEGIC REVEAL */}
+      <section className="py-32 md:py-48 px-6 relative overflow-hidden">
+        {/* Background Atmosphere */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[700px] bg-primary/10 blur-[180px] rounded-full pointer-events-none opacity-40 animate-pulse" />
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] pointer-events-none mix-blend-overlay" />
 
-        <div className="text-center max-w-4xl">
-          <h2 className="text-4xl md:text-8xl font-black italic mb-6 md:mb-10 text-[#2d2d2d] uppercase tracking-tighter leading-none">
-            STOP BROWSING.<br />
-            <span className="text-primary not-italic">START SECURING.</span>
-          </h2>
-          <p className="text-lg md:text-2xl text-neutral-500 mb-8 md:mb-14 font-medium leading-relaxed px-4">
-            Join 12,000+ high-value professionals who use IndeedBot 2026 to optimize their career trajectory. The complex job market just met its match.
+        <div className="container mx-auto relative z-10 text-center">
+          <div className="max-w-6xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-3 px-6 py-2 rounded-full glass mb-10 shadow-2xl"
+            >
+              <Zap className="w-5 h-5 text-primary shadow-glow-primary" />
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-foreground/50 italic">Operational Superiority Initialized</span>
+            </motion.div>
 
-          </p>
-          <Link href="#pricing">
-            <button className="px-8 py-4 md:px-14 md:py-7 bg-primary text-white font-black text-base md:text-2xl rounded-xl md:rounded-2xl shadow-xl md:shadow-2xl shadow-primary/30 hover:bg-indeed-blue-hover hover:scale-105 transition-all flex items-center justify-center gap-3 md:gap-5 mx-auto group ring-4 md:ring-8 ring-primary/5">
-              GET STARTED NOW <ArrowRight className="w-5 h-5 md:w-8 md:h-8 group-hover:translate-x-3 transition-transform" />
-            </button>
-          </Link>
+            <h2 className="text-5xl md:text-9xl font-black italic uppercase tracking-tighter leading-[0.75] text-foreground mb-10">
+              STOP HUNTING.<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-primary to-blue-700 not-italic">START WINNING.</span>
+            </h2>
+
+            <p className="text-lg md:text-2xl text-neutral-400 font-medium leading-relaxed max-w-4xl mx-auto italic mb-16 opacity-80">
+              Don't apply to jobs like it's 2010. Use the intelligence swarm that
+              turns your career search into a quantitative strategy.
+            </p>
+
+            <div className="flex flex-col md:flex-row items-center justify-center gap-10">
+              <Link href="/sign-up" className="group relative w-full md:w-auto">
+                <div className="absolute -inset-2 bg-primary blur-2xl opacity-20 group-hover:opacity-50 transition-all duration-500" />
+                <button className="relative w-full px-12 py-6 bg-foreground text-background font-black text-xl md:text-3xl rounded-2xl shadow-2xl hover:scale-[1.05] active:scale-95 transition-all flex items-center justify-center gap-5 uppercase overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                  Secure Access — Free
+                  <Chrome className="w-8 h-8 group-hover:rotate-12 transition-transform" />
+                </button>
+              </Link>
+            </div>
+
+            <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-10 max-w-4xl mx-auto opacity-30">
+              {[
+                { label: "SECURE", value: "AES-256" },
+                { label: "POWER", value: "NEURAL_V1.0" },
+                { label: "PRIVACY", value: "ZERO_TRACK" },
+                { label: "RATING", value: "5.0_STARS" }
+              ].map((stat, i) => (
+                <div key={i} className="text-center">
+                  <div className="text-[10px] font-black uppercase tracking-widest text-neutral-500 mb-1">{stat.label}</div>
+                  <div className="text-sm font-black text-foreground italic">{stat.value}</div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 

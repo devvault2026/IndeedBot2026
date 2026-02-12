@@ -1,84 +1,127 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Search, Brain, Target, ShieldAlert, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Search, Target, ShieldCheck, CheckCircle2, Radio, Briefcase, FileText, Globe, MessageSquare, Zap, Cpu, Network, Sparkles } from "lucide-react";
 
-const steps = [
+const team = [
     {
-        title: "Market Signal Extraction",
-        description: "IndeedBot parses raw DOM data to extract hidden intent, budget signals, and hiring urgency.",
-        icon: Search
+        name: "The Strategist",
+        description: "Analyzes jobs instantly and tells you exactly how you match.",
+        icon: Briefcase,
+        color: "text-blue-400",
+        tag: "INTEL_NODE"
     },
     {
-        title: "Semantic Resume Matching",
-        description: "The Candidate Positioning Engine aligns your dossier with the specific 1:1 requirements of the role.",
-        icon: Target
+        name: "The Resume Builder",
+        description: "Automatically rewrites your resume for every specific role.",
+        icon: FileText,
+        color: "text-purple-400",
+        tag: "ARCHITECT_CORE"
     },
     {
-        title: "Risk & Saturation Scoring",
-        description: "We analyze applicant volume and institutional legitimacy to predict your probability of success.",
-        icon: ShieldAlert
+        name: "The Company Scout",
+        description: "Researches companies and stakeholders before you apply.",
+        icon: Globe,
+        color: "text-orange-400",
+        tag: "RECON_UNIT"
     },
     {
-        title: "Strategic Output",
-        description: "The system generates an optimized application package and negotiation protocol for the final stage.",
-        icon: CheckCircle2
+        name: "The Interview Coach",
+        description: "Practices interview questions with real-time feedback.",
+        icon: MessageSquare,
+        color: "text-green-400",
+        tag: "SIMULATION_CMD"
     }
 ];
 
-export const DecisionFlow = () => {
+export const AI_CareerTeam = () => {
     return (
-        <section className="py-16 md:py-32 px-4 bg-neutral-900 overflow-hidden relative">
-            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_50%,rgba(0,102,255,0.05),transparent)] pointer-events-none" />
+        <section id="how-it-works" className="py-32 md:py-64 px-6 bg-background relative overflow-hidden">
+            {/* Background Atmosphere */}
+            <div className="absolute top-1/4 left-0 w-[600px] h-[600px] bg-primary/10 blur-[180px] rounded-full pointer-events-none opacity-30" />
+            <div className="absolute bottom-1/4 right-0 w-[600px] h-[600px] bg-blue-600/10 blur-[180px] rounded-full pointer-events-none opacity-20" />
+            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] pointer-events-none" />
 
-            <div className="max-w-6xl mx-auto">
-                <div className="text-center mb-12 md:mb-24">
-                    <h2 className="text-3xl md:text-6xl font-black italic mb-6 md:mb-8 text-white uppercase tracking-tighter">
-                        Controlled <br className="md:hidden" />
-                        <span className="text-primary not-italic">Decision Intelligence.</span>
+            <div className="max-w-7xl mx-auto relative z-10">
+                <div className="text-center mb-32">
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        className="inline-flex items-center gap-3 px-6 py-2 rounded-full glass mb-10 shadow-2xl border-border"
+                    >
+                        <Sparkles className="w-4 h-4 text-primary animate-pulse" />
+                        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-foreground/50 italic">Your AI Career Infrastructure</span>
+                    </motion.div>
+
+                    <h2 className="text-6xl md:text-[10rem] font-black italic mb-10 text-foreground uppercase tracking-tighter leading-[0.8]">
+                        MEET YOUR AI <br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-primary to-blue-700 not-italic">CAREER TEAM.</span>
                     </h2>
-                    <p className="text-lg md:text-xl text-neutral-400 font-medium max-w-2xl mx-auto px-4">
-                        This is not automation. This is a multi-stage strategic reasoning system designed to eliminate market noise.
+                    <p className="max-w-3xl mx-auto text-xl md:text-2xl text-neutral-400 font-medium italic leading-relaxed">
+                        IndeedBot puts an elite team of AI agents inside your browser.
+                        They work together in a decentralized swarm to turn your application
+                        into a mathematical certainty.
                     </p>
                 </div>
 
-                <div className="relative">
-                    {/* Connection Line */}
-                    <div className="absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-primary/20 to-transparent hidden lg:block -translate-y-1/2" />
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+                    {team.map((member, i) => (
+                        <motion.div
+                            key={i}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                            viewport={{ once: true }}
+                            className="group relative"
+                        >
+                            {/* Card Glow Effect */}
+                            <div className="absolute -inset-0.5 bg-gradient-to-br from-foreground/10 to-transparent rounded-[3rem] opacity-0 group-hover:opacity-100 transition duration-700" />
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-                        {steps.map((step, i) => (
-                            <motion.div
-                                key={i}
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                transition={{ delay: i * 0.2 }}
-                                viewport={{ once: true }}
-                                className="relative z-10"
-                            >
-                                <div className="bg-neutral-800 border border-white/5 p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] h-full flex flex-col items-center text-center hover:border-primary/40 transition-all group">
-                                    <div className="w-12 h-12 md:w-16 md:h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6 md:mb-8 group-hover:scale-110 transition-transform shadow-2xl shadow-primary/20">
-                                        <step.icon className="w-6 h-6 md:w-8 md:h-8" />
+                            <div className="relative h-full glass-dark p-12 rounded-[3.5rem] border border-border flex flex-col items-start hover:bg-background transition-all duration-500 shadow-2xl">
+                                {/* Header Info */}
+                                <div className="flex items-center justify-between w-full mb-12">
+                                    <div className={`p-4 rounded-2xl glass border border-border group-hover:scale-110 transition-transform ${member.color} shadow-2xl shadow-current/5`}>
+                                        <member.icon className="w-8 h-8" />
                                     </div>
-                                    <h4 className="text-base md:text-lg font-black text-white uppercase mb-3 md:mb-4 italic tracking-tight">{step.title}</h4>
-                                    <p className="text-xs md:text-sm text-neutral-500 font-medium leading-relaxed">{step.description}</p>
-
-                                    {i < steps.length - 1 && (
-                                        <div className="absolute top-1/2 -right-4 translate-y-1/2 lg:block hidden">
-                                            <ArrowRight className="w-8 h-8 text-white/10" />
-                                        </div>
-                                    )}
+                                    <div className="px-3 py-1 glass rounded-lg border border-border">
+                                        <span className="text-[9px] font-black text-neutral-500 uppercase tracking-widest">{member.tag}</span>
+                                    </div>
                                 </div>
-                            </motion.div>
-                        ))}
-                    </div>
+
+                                {/* Content */}
+                                <h4 className="text-3xl font-black text-foreground uppercase mb-6 italic tracking-tighter group-hover:text-primary transition-colors">
+                                    {member.name}
+                                </h4>
+                                <p className="text-lg text-neutral-500 font-medium leading-relaxed mb-10 italic">
+                                    {member.description}
+                                </p>
+
+                                {/* Footer Stats */}
+                                <div className="mt-auto pt-10 border-t border-border w-full flex items-center justify-between">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                                        <span className="text-[9px] font-black text-foreground/40 uppercase tracking-widest">Protocol Active</span>
+                                    </div>
+                                    <div className="text-[12px] font-black text-foreground/10 uppercase italic group-hover:text-primary/20 transition-colors">
+                                        0{i + 1}
+                                    </div>
+                                </div>
+
+                                {/* Decorative Background Elements */}
+                                <div className="absolute top-0 right-0 p-8 opacity-0 group-hover:opacity-10 transition-opacity">
+                                    <Cpu className="w-24 h-24 text-foreground" />
+                                </div>
+                            </div>
+                        </motion.div>
+                    ))}
                 </div>
 
-                <div className="mt-12 md:mt-20 text-center">
-                    <p className="inline-flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 rounded-full bg-white/5 border border-white/10 text-white text-[10px] md:text-xs font-black uppercase tracking-widest italic">
-                        <Brain className="w-3 h-3 md:w-4 md:h-4 text-primary" />
-                        System Architecture: Phase 4.0 // Reasoning Dominance
-                    </p>
+                {/* Bottom Technical Tag */}
+                <div className="mt-32 text-center opacity-20">
+                    <div className="inline-flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.6em] text-foreground">
+                        <Network className="w-4 h-4" />
+                        Decentralized Career Intelligence V4.2
+                    </div>
                 </div>
             </div>
         </section>

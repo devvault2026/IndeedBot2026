@@ -2,143 +2,121 @@
 
 import { Navbar } from "@/components/Navbar";
 import { motion } from "framer-motion";
-import { Database, Search, ShieldCheck, Zap, Bookmark, BarChart, HardDrive, Lock } from "lucide-react";
+import { Lock, ShieldCheck, Database, Smartphone, HardDrive } from "lucide-react";
 
 export default function VaultPage() {
     return (
-        <main className="min-h-screen bg-white">
+        <main className="min-h-screen bg-background text-foreground antialiased">
             <Navbar />
 
             {/* Hero Section */}
-            <section className="pt-40 pb-24 px-4 bg-white border-b border-neutral-100 overflow-hidden relative">
-                <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none -z-10"
-                    style={{ backgroundImage: 'radial-gradient(#2557a7 1.5px, transparent 1.5px)', backgroundSize: '60px 60px' }}>
-                </div>
+            <section className="pt-40 pb-24 px-6 relative overflow-hidden">
+                <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-blue-500/10 blur-[150px] rounded-full pointer-events-none -z-10" />
 
-                <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
-                    <div className="flex-1 text-left">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/5 border border-primary/20 text-primary text-[10px] font-black uppercase mb-8 tracking-[2px]">
-                            <Database className="w-3 h-3" />
-                            <span>Job Vault / Persistence</span>
-                        </div>
-                        <h1 className="text-5xl md:text-7xl font-black mb-8 text-[#2d2d2d] italic leading-tight uppercase">
-                            STRATEGIC <br /><span className="text-primary not-italic">REPOSITORY.</span>
-                        </h1>
-                        <p className="text-xl text-neutral-600 mb-12 leading-relaxed font-medium max-w-2xl">
-                            Don't lose your dream job to a refresh button. IndeedBot's persistent Job Vault saves
-                            every opportunity you find, including full HTML descriptions, salary data, and benefits—locally in your browser.
-                        </p>
-                        <div className="flex flex-wrap gap-4">
-                            <button className="px-8 py-4 bg-primary text-white font-black rounded-xl shadow-lg hover:shadow-primary/30 transition-all">
-                                INITIALIZE VAULT
-                            </button>
-                        </div>
-                    </div>
+                <div className="max-w-7xl mx-auto flex flex-col items-center text-center relative z-10">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8 border-blue-500/20"
+                    >
+                        <Lock className="w-4 h-4 text-blue-400 shadow-glow-blue" />
+                        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-foreground/50 italic">Agent Echo / Encryption Vault</span>
+                    </motion.div>
 
-                    <div className="flex-1 relative">
-                        <div className="bg-white p-8 rounded-[3rem] shadow-2xl border border-neutral-200 relative overflow-hidden group">
-                            <div className="flex items-center justify-between mb-8 pb-4 border-b border-neutral-100">
-                                <div className="flex items-center gap-3">
-                                    <Bookmark className="w-6 h-6 text-primary" />
-                                    <span className="font-black text-[#2d2d2d] uppercase tracking-tighter italic">Opportunities Saved</span>
-                                </div>
-                                <span className="text-xl font-black text-primary">124</span>
-                            </div>
-                            <div className="space-y-4">
-                                {[
-                                    { title: "Senior AI Architect", corp: "Future Solutions", salary: "$220k" },
-                                    { title: "Lead Systems Engineer", corp: "Global Nexus", salary: "$195k" }
-                                ].map((job, i) => (
-                                    <div key={i} className="p-5 bg-neutral-50 rounded-2xl border border-neutral-200 flex items-center justify-between group-hover:border-primary/20 transition-all">
-                                        <div>
-                                            <p className="font-bold text-sm text-[#2d2d2d]">{job.title}</p>
-                                            <p className="text-[10px] font-black text-neutral-400 uppercase tracking-widest">{job.corp}</p>
-                                        </div>
-                                        <span className="text-sm font-black text-[#2d2d2d] tracking-widest">{job.salary}</span>
-                                    </div>
-                                ))}
-                                <div className="p-4 bg-primary/5 rounded-xl flex items-center justify-center gap-2 border border-primary/10">
-                                    <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ repeat: Infinity, duration: 2 }}>
-                                        <Lock className="w-4 h-4 text-primary" />
-                                    </motion.div>
-                                    <span className="text-[10px] font-black uppercase text-primary tracking-widest">Secured Locally</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Feature Deep Dive */}
-            <section className="py-32 px-4 bg-white">
-                <div className="max-w-7xl mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {[
-                            {
-                                icon: HardDrive,
-                                title: "Local-First Storage",
-                                desc: "All job data is stored in your Chrome indexedDB. Zero cloud uploads, 100% privacy."
-                            },
-                            {
-                                icon: Search,
-                                title: "Full-Text Search",
-                                desc: "Search through every job description you've ever saved, even if the original posting is taken down."
-                            },
-                            {
-                                icon: BarChart,
-                                title: "Status Tracking",
-                                desc: "Manage the entire lifecycle from 'Saved' to 'Interviewing' to 'Offer Secured' in one dashboard."
-                            },
-                            {
-                                icon: ShieldCheck,
-                                title: "Data Integrity",
-                                desc: "Auto-backups ensure your job hunt history is preserved throughout your career journey."
-                            }
-                        ].map((feature, i) => (
-                            <div key={i} className="indeed-card p-10 rounded-3xl">
-                                <div className="w-14 h-14 bg-primary/5 rounded-xl flex items-center justify-center text-primary mb-8 shadow-sm">
-                                    <feature.icon className="w-7 h-7" />
-                                </div>
-                                <h3 className="text-xl font-black text-[#2d2d2d] uppercase mb-4 italic tracking-tight">{feature.title}</h3>
-                                <p className="text-neutral-500 text-sm font-medium leading-relaxed">{feature.desc}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Persistence Section */}
-            <section className="py-32 px-4 bg-neutral-50 border-y border-neutral-200 overflow-hidden relative text-center">
-                <div className="max-w-4xl mx-auto">
-                    <h2 className="text-4xl md:text-5xl font-black mb-8 italic uppercase tracking-tighter">Memory for your Career</h2>
-                    <p className="text-xl text-neutral-500 mb-16 leading-relaxed max-w-2xl mx-auto font-medium">
-                        Recruiters take down postings to hide their tracks. IndeedBot captures the truth the moment you see it,
-                        preserving the context for your strategy.
+                    <h1 className="text-6xl md:text-9xl font-black mb-10 text-foreground italic uppercase tracking-tighter leading-[0.8]">
+                        OFFLINE <br /><span className="text-blue-400 not-italic">PERSISTENCE.</span>
+                    </h1>
+                    <p className="text-xl text-neutral-400 mb-16 leading-relaxed font-medium max-w-3xl italic">
+                        Your intelligence shouldn't depend on an internet connection. Agent Echo encrypts and stores
+                        your leads, resumes, and tactics locally—ensuring absolute privacy and 24/7 access.
                     </p>
+                    <div className="flex flex-wrap gap-4 justify-center">
+                        <button className="px-12 py-6 bg-foreground text-background font-black rounded-2xl shadow-2xl hover:scale-105 transition-all uppercase tracking-widest text-sm">
+                            INITIALIZE THE VAULT
+                        </button>
+                    </div>
+                </div>
+            </section>
 
-                    <div className="flex items-center justify-center gap-12 grayscale opacity-50">
-                        <div className="flex flex-col items-center gap-4">
-                            <Database className="w-12 h-12" />
-                            <span className="text-[10px] font-black uppercase tracking-widest leading-none">Persistent</span>
-                        </div>
-                        <div className="w-px h-16 bg-neutral-300" />
-                        <div className="flex flex-col items-center gap-4">
-                            <Lock className="w-12 h-12" />
-                            <span className="text-[10px] font-black uppercase tracking-widest leading-none">Encrypted</span>
-                        </div>
-                        <div className="w-px h-16 bg-neutral-300" />
-                        <div className="flex flex-col items-center gap-4">
-                            <Zap className="w-12 h-12" />
-                            <span className="text-[10px] font-black uppercase tracking-widest leading-none">Instant</span>
+            {/* Visualization Section */}
+            <section className="py-32 px-6">
+                <div className="max-w-7xl mx-auto">
+                    <div className="glass-dark p-2 rounded-[4rem] border border-border shadow-3xl bg-background/40 relative overflow-hidden group">
+                        <div className="glass rounded-[3.9rem] p-12 md:p-24 border border-border relative">
+                            {/* Grid UI background */}
+                            <div className="absolute inset-0 opacity-10 pointer-events-none"
+                                style={{ backgroundImage: 'linear-gradient(to right, #1e40af 1px, transparent 1px), linear-gradient(to bottom, #1e40af 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+
+                            <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                                <div className="space-y-12">
+                                    <h2 className="text-5xl font-black text-foreground italic uppercase tracking-tighter leading-tight">HARDENED <br />LOCAL STORAGE.</h2>
+                                    <div className="space-y-8">
+                                        {[
+                                            { icon: ShieldCheck, title: "Zero-Knowledge Sync", desc: "We don't hold your keys. Your data is encrypted with AES-256 before it ever hits the cache." },
+                                            { icon: Database, title: "Edge Persistence", desc: "Advanced IndexedDB implementation allows for complex queries and lead management without a server." },
+                                            { icon: Smartphone, title: "Mobile Ready", desc: "Sync your intelligence across your devices using PWA technology for seamless field operations." }
+                                        ].map((item, i) => (
+                                            <div key={i} className="flex gap-6 group">
+                                                <div className="shrink-0 w-12 h-12 glass rounded-xl flex items-center justify-center text-blue-400 border-blue-500/20 group-hover:scale-110 transition-transform">
+                                                    <item.icon className="w-6 h-6" />
+                                                </div>
+                                                <div>
+                                                    <h3 className="text-xl font-black text-foreground uppercase italic tracking-tighter mb-2">{item.title}</h3>
+                                                    <p className="text-neutral-500 font-bold italic leading-relaxed">{item.desc}</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="relative">
+                                    <div className="aspect-square glass rounded-[3rem] border border-border shadow-2xl p-12 flex flex-col items-center justify-center gap-8 relative overflow-hidden bg-background/60">
+                                        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent pointer-events-none" />
+                                        <div className="w-48 h-48 rounded-full border border-blue-500/20 flex items-center justify-center relative">
+                                            <div className="absolute inset-0 rounded-full border-t-2 border-blue-400 animate-spin" style={{ animationDuration: '4s' }} />
+                                            <div className="absolute inset-4 rounded-full border-b-2 border-blue-600 animate-spin" style={{ animationDuration: '6s', animationDirection: 'reverse' }} />
+                                            <Lock className="w-20 h-20 text-blue-400 shadow-glow-blue" />
+                                        </div>
+                                        <div className="text-center space-y-2">
+                                            <p className="text-2xl font-black text-foreground tracking-widest uppercase italic">Vault_01</p>
+                                            <p className="text-[10px] font-black text-blue-400/50 uppercase tracking-[6px] italic">STATUS: ENCRYPTED</p>
+                                        </div>
+                                    </div>
+
+                                    {/* Floating Element */}
+                                    <motion.div
+                                        animate={{ y: [0, -20, 0] }}
+                                        transition={{ duration: 4, repeat: Infinity }}
+                                        className="absolute -top-10 -right-10 glass p-6 rounded-[2rem] border border-border shadow-2xl flex items-center gap-4 bg-background/80"
+                                    >
+                                        <HardDrive className="w-8 h-8 text-blue-400" />
+                                        <div>
+                                            <p className="text-[10px] font-black text-foreground/40 uppercase italic tracking-widest">Local Buffer</p>
+                                            <p className="text-lg font-black text-foreground italic">14.2 GB</p>
+                                        </div>
+                                    </motion.div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <footer className="py-20 px-4 bg-white">
-                <div className="max-w-7xl mx-auto text-center">
-                    <p className="text-sm font-black text-[#2d2d2d] uppercase tracking-[3px]">© 2026 LIBERATED BY OFFICIALPR0X</p>
-                </div>
+            {/* Tactical Advantage */}
+            <section className="py-48 px-6 text-center relative overflow-hidden">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[600px] bg-blue-500/5 blur-[150px] rounded-full pointer-events-none" />
+
+                <h2 className="text-5xl md:text-8xl font-black mb-12 italic uppercase tracking-tighter text-foreground leading-none relative z-10">
+                    YOUR DATA.<br />
+                    <span className="text-blue-400 not-italic">YOUR SOVEREIGNTY.</span>
+                </h2>
+                <button className="px-14 py-7 bg-foreground text-background font-black text-2xl rounded-2xl shadow-2xl hover:scale-105 transition-all uppercase tracking-widest relative z-10">
+                    DEPLOY MISSION CACHE
+                </button>
+            </section>
+
+            <footer className="py-20 px-6 border-t border-border text-center">
+                <p className="text-[10px] font-black text-neutral-600 uppercase tracking-[0.5em] italic">© 2026 INDEEDBOT SYSTEMS — ALL RIGHTS RESERVED</p>
             </footer>
         </main>
     );

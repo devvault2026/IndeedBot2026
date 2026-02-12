@@ -1,87 +1,125 @@
+"use client";
+
 import Link from "next/link";
-import { ShieldCheck, Twitter, Github, Linkedin, Cpu } from "lucide-react";
+import { ShieldCheck, Twitter, Github, Linkedin, Cpu, Zap, Globe, Lock } from "lucide-react";
+import { motion } from "framer-motion";
 
 export const Footer = () => {
     return (
-        <footer className="bg-[#2d2d2d] text-white py-16 md:py-24 px-4 overflow-hidden relative">
-            {/* Background Pattern */}
-            <div className="absolute top-0 right-0 w-full h-full opacity-[0.03] pointer-events-none"
-                style={{ backgroundImage: 'radial-gradient(white 1px, transparent 1px)', backgroundSize: '30px 30px' }}>
-            </div>
+        <footer className="bg-background text-foreground py-24 md:py-32 px-4 relative overflow-hidden border-t border-border">
+            {/* Background Grid Accent */}
+            <div className="absolute inset-0 grid-background opacity-10 pointer-events-none" />
 
-            <div className="max-w-7xl mx-auto relative z-10">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
-                    <div className="space-y-6">
-                        <Link href="/" className="flex items-center gap-3">
-                            <div className="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center border border-primary/20">
-                                <Cpu className="w-6 h-6 text-primary" />
+            <div className="container mx-auto relative z-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 md:gap-24 mb-32">
+
+                    {/* Brand Section */}
+                    <div className="space-y-8">
+                        <Link href="/" className="flex items-center gap-3 group">
+                            <div className="w-10 h-10 glass rounded-xl flex items-center justify-center border-border group-hover:border-primary/50 transition-colors">
+                                <img
+                                    src="https://res.cloudinary.com/dpfapm0tl/image/upload/v1770163492/icon_x6kgnr.png"
+                                    alt="IndeedBot"
+                                    className="w-6 h-6 object-contain"
+                                />
                             </div>
-                            <span className="text-xl font-bold tracking-tight text-white">
-                                Indeed<span className="text-primary font-black">Bot</span>
+                            <span className="text-xl font-black tracking-tighter text-foreground uppercase italic">
+                                Indeed<span className="text-primary not-italic">Bot</span>
                             </span>
                         </Link>
-                        <p className="text-neutral-400 text-sm leading-relaxed max-w-xs">
-                            The world's first multi-agent career intelligence infrastructure. Liberate your career from the algorithm.
+                        <p className="text-neutral-500 text-sm leading-relaxed max-w-xs font-medium">
+                            The world's first multi-agent career intelligence infrastructure.
+                            De-risking your professional growth through adversarial protocol.
                         </p>
                         <div className="flex items-center gap-4">
-                            <Link href="#" className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all text-neutral-400">
-                                <Twitter className="w-4 h-4" />
-                            </Link>
-                            <Link href="#" className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all text-neutral-400">
-                                <Github className="w-4 h-4" />
-                            </Link>
-                            <Link href="#" className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center hover:bg-primary hover:text-white transition-all text-neutral-400">
-                                <Linkedin className="w-4 h-4" />
-                            </Link>
+                            <SocialLink icon={<Twitter className="w-4 h-4" />} href="#" />
+                            <SocialLink icon={<Github className="w-4 h-4" />} href="#" />
+                            <SocialLink icon={<Linkedin className="w-4 h-4" />} href="#" />
                         </div>
                     </div>
 
+                    {/* Links: Platform */}
                     <div>
-                        <h4 className="text-xs font-black uppercase tracking-widest text-neutral-500 mb-8">Platform</h4>
-                        <ul className="space-y-4 text-sm font-medium text-neutral-300">
-                            <li><Link href="/features/intelligence" className="hover:text-primary transition-colors">Career Intelligence</Link></li>
-                            <li><Link href="/features/resume" className="hover:text-primary transition-colors">Resume Architect</Link></li>
-                            <li><Link href="/features/scout" className="hover:text-primary transition-colors">Corporate Scout</Link></li>
-                            <li><Link href="#pricing" className="hover:text-primary transition-colors">Pricing</Link></li>
+                        <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-neutral-600 mb-10 italic">Intelligence Hub</h4>
+                        <ul className="space-y-6 text-sm font-bold text-neutral-400">
+                            <li><NavLink href="/features/intelligence">Market Extraction</NavLink></li>
+                            <li><NavLink href="/features/resume">Resume Alignment</NavLink></li>
+                            <li><NavLink href="/features/scout">Entity Scoring</NavLink></li>
+                            <li><NavLink href="/features/vault">Offline Persistence</NavLink></li>
                         </ul>
                     </div>
 
+                    {/* Links: Resources */}
                     <div>
-                        <h4 className="text-xs font-black uppercase tracking-widest text-neutral-500 mb-8">Resources</h4>
-                        <ul className="space-y-4 text-sm font-medium text-neutral-300">
-                            <li><Link href="/docs" className="hover:text-primary transition-colors">Documentation</Link></li>
-                            <li><Link href="/blog" className="hover:text-primary transition-colors">Intelligence Blog</Link></li>
-                            <li><Link href="/status" className="hover:text-primary transition-colors">System Status</Link></li>
-                            <li><Link href="/help" className="hover:text-primary transition-colors">Support Center</Link></li>
+                        <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-neutral-600 mb-10 italic">Operational Data</h4>
+                        <ul className="space-y-6 text-sm font-bold text-neutral-400">
+                            <li><NavLink href="/docs">System Docs</NavLink></li>
+                            <li><NavLink href="/blog">Strategic Blog</NavLink></li>
+                            <li><NavLink href="/status">Network Status</NavLink></li>
+                            <li><NavLink href="/help">Mission Support</NavLink></li>
                         </ul>
                     </div>
 
-                    <div>
-                        <h4 className="text-xs font-black uppercase tracking-widest text-neutral-500 mb-8">Legal</h4>
-                        <ul className="space-y-4 text-sm font-medium text-neutral-300">
-                            <li><Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
-                            <li><Link href="/terms" className="hover:text-primary transition-colors">Terms of Service</Link></li>
-                            <li><Link href="/security" className="hover:text-primary transition-colors">Security Protocol</Link></li>
-                        </ul>
-                        <div className="mt-8 p-4 bg-white/5 rounded-xl border border-white/5">
-                            <div className="flex items-center gap-2 text-green-500 text-[10px] font-black uppercase tracking-widest mb-1">
-                                <ShieldCheck className="w-3 h-3" />
-                                <span>Encrypted</span>
+                    {/* Security & Legal */}
+                    <div className="space-y-10">
+                        <div>
+                            <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-neutral-600 mb-10 italic">Compliance</h4>
+                            <ul className="space-y-6 text-sm font-bold text-neutral-400">
+                                <li><NavLink href="/privacy">Privacy Protocol</NavLink></li>
+                                <li><NavLink href="/terms">Rules of Engagement</NavLink></li>
+                                <li><NavLink href="/security">Encryption Standards</NavLink></li>
+                            </ul>
+                        </div>
+
+                        <div className="glass p-6 rounded-2xl border-border relative overflow-hidden group">
+                            <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                            <div className="flex items-center gap-3 text-primary text-[10px] font-black uppercase tracking-widest mb-2 italic">
+                                <Lock className="w-3 h-3" />
+                                <span>Secured Node</span>
                             </div>
-                            <p className="text-[10px] text-neutral-500">256-Bit SSL Secured Connection</p>
+                            <p className="text-[10px] text-neutral-500 font-bold leading-none">AES-256 E2E PERSISTENCE ACTIVE</p>
                         </div>
                     </div>
                 </div>
 
-                <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
-                    <p className="text-xs text-neutral-500 font-medium">
-                        © 2026 IndeedBot Systems Inc. All rights reserved.
-                    </p>
-                    <p className="text-[10px] font-black text-neutral-600 uppercase tracking-[2px]">
-                        Designed for the 1% Career
-                    </p>
+                {/* Bottom Bar */}
+                <div className="pt-12 border-t border-border flex flex-col md:flex-row items-center justify-between gap-8">
+                    <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+                        <p className="text-[10px] text-neutral-600 font-black uppercase tracking-widest italic">
+                            © 2026 INDEEDBOT SYSTEMS INC.
+                        </p>
+                        <div className="flex items-center gap-2">
+                            <Globe className="w-3 h-3 text-neutral-700" />
+                            <span className="text-[9px] text-neutral-700 font-black uppercase tracking-[0.2em]">Global Presence Active</span>
+                        </div>
+                    </div>
+
+                    <div className="flex items-center gap-6">
+                        <span className="text-[10px] font-black text-foreground px-3 py-1 glass rounded-full border border-border italic">
+                            CANDIDATE_FIRST_MISSION
+                        </span>
+                        <div className="h-4 w-px bg-border" />
+                        <p className="text-[10px] font-black text-neutral-600 uppercase tracking-[0.3em]">
+                            Built for the 1%
+                        </p>
+                    </div>
                 </div>
             </div>
         </footer>
     );
 };
+
+const SocialLink = ({ icon, href }: { icon: React.ReactNode, href: string }) => (
+    <Link
+        href={href}
+        className="w-10 h-10 glass rounded-xl flex items-center justify-center text-neutral-500 hover:text-primary hover:border-primary/50 transition-all active:scale-95"
+    >
+        {icon}
+    </Link>
+);
+
+const NavLink = ({ href, children }: { href: string, children: React.ReactNode }) => (
+    <Link href={href} className="hover:text-foreground transition-colors block italic">
+        {children}
+    </Link>
+);
