@@ -99,7 +99,7 @@ export const Navbar = () => {
                                                     href="/features/interview"
                                                     icon={<MessageSquare className="w-5 h-5" />}
                                                     title="The Interview Coach"
-                                                    desc="Simulates high-stakes rounds with neural AI logic."
+                                                    desc="Simulates high-stakes rounds with personalized AI feedback."
                                                     color="text-emerald-400"
                                                 />
                                             </div>

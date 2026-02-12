@@ -62,7 +62,7 @@ export default function Home() {
               className="inline-flex items-center gap-3 px-6 py-2 rounded-full glass mb-10 shadow-2xl"
             >
               <Zap className="w-5 h-5 text-primary shadow-glow-primary" />
-              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-foreground/50 italic">Operational Superiority Initialized</span>
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-foreground/50 italic">Elite Performance Initialized</span>
             </motion.div>
 
             <h2 className="text-5xl md:text-9xl font-black italic uppercase tracking-tighter leading-[0.75] text-foreground mb-10">
@@ -71,8 +71,8 @@ export default function Home() {
             </h2>
 
             <p className="text-lg md:text-2xl text-neutral-400 font-medium leading-relaxed max-w-4xl mx-auto italic mb-16 opacity-80">
-              Don't apply to jobs like it's 2010. Use the intelligence swarm that
-              turns your career search into a quantitative strategy.
+              Don't apply to jobs like it's 2010. Use the AI-led intelligence that
+              turns your career search into a data-driven strategy.
             </p>
 
             <div className="flex flex-col md:flex-row items-center justify-center gap-10">
@@ -88,8 +88,8 @@ export default function Home() {
 
             <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-10 max-w-4xl mx-auto opacity-30">
               {[
-                { label: "SECURE", value: "AES-256" },
-                { label: "POWER", value: "NEURAL_V1.0" },
+                { label: "SECURE", value: "ENCRYPTED" },
+                { label: "POWER", value: "AI_GEN_V1.0" },
                 { label: "PRIVACY", value: "ZERO_TRACK" },
                 { label: "RATING", value: "5.0_STARS" }
               ].map((stat, i) => (

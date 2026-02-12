@@ -8,10 +8,10 @@ import Link from "next/link";
 const AI_STEPS = [
     "Scanning Job Post...",
     "Finding Hidden Salary...",
-    "Matching Keywords...",
-    "Optimizing Bullet Points...",
-    "Checking ATS Score...",
-    "Ready for Application."
+    "Matching Elite Keywords...",
+    "Perfecting Bullet Points...",
+    "Finalizing Performance Score...",
+    "Ready for Placement."
 ];
 
 export const Hero = () => {
@@ -165,8 +165,8 @@ export const Hero = () => {
                                                 <Zap className="w-6 h-6 text-primary" />
                                             </div>
                                             <div>
-                                                <div className="text-xs font-black uppercase text-foreground">Job Architect</div>
-                                                <div className="text-[10px] text-neutral-500 font-mono">Running Analysis...</div>
+                                                <div className="text-xs font-black uppercase text-foreground">AI Strategist</div>
+                                                <div className="text-[10px] text-neutral-500 font-mono">Analyzing Target...</div>
                                             </div>
                                         </div>
                                         <div className="px-3 py-1 bg-green-500/10 border border-green-500/20 rounded-full text-[10px] font-black text-green-500 uppercase tracking-wider animate-pulse">

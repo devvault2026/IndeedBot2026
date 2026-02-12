@@ -4,13 +4,19 @@ import { motion } from "framer-motion";
 import { Lock, Power, Terminal, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { ThemeToggle } from "./ThemeToggle";
 
 export const AuthWrapper = ({ children }: { children: React.ReactNode }) => {
     const [scale, setScale] = useState(1);
     const [resolution, setResolution] = useState({ w: 0, h: 0 });
     const pathname = usePathname();
+    const searchParams = useSearchParams();
+
+    // Preserve extension query params when toggling sign-in/sign-up
+    const queryString = searchParams.toString();
+    const signInHref = queryString ? `/sign-in?${queryString}` : "/sign-in";
+    const signUpHref = queryString ? `/sign-up?${queryString}` : "/sign-up";
 
     useEffect(() => {
         document.body.style.overflow = 'hidden';
@@ -115,13 +121,13 @@ export const AuthWrapper = ({ children }: { children: React.ReactNode }) => {
                         {/* THE TOGGLE */}
                         <div className="mb-12 flex bg-background border border-border p-1.5 rounded-2xl shadow-xl relative z-20">
                             <Link
-                                href="/sign-in"
+                                href={signInHref}
                                 className={`px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-[0.3em] transition-all duration-300 min-w-[140px] text-center ${pathname.includes('sign-in') ? 'bg-primary text-white shadow-glow-primary' : 'text-neutral-500 hover:text-foreground'}`}
                             >
                                 Sign In
                             </Link>
                             <Link
-                                href="/sign-up"
+                                href={signUpHref}
                                 className={`px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-[0.3em] transition-all duration-300 min-w-[140px] text-center ${pathname.includes('sign-up') ? 'bg-primary text-white shadow-glow-primary' : 'text-neutral-500 hover:text-foreground'}`}
                             >
                                 Register
