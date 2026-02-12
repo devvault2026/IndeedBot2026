@@ -94,10 +94,12 @@ export const Pricing = () => {
                                         exit={{ opacity: 0, scale: 1.2 }}
                                         className="text-8xl font-black text-foreground tracking-tighter"
                                     >
-                                        ${billingCycle === 'monthly' ? '20' : '13'}
+                                        ${billingCycle === 'monthly' ? '20' : '156'}
                                     </motion.span>
                                 </AnimatePresence>
-                                <span className="text-neutral-500 font-black text-xs uppercase italic tracking-widest">/ Month</span>
+                                <span className="text-neutral-500 font-black text-xs uppercase italic tracking-widest">
+                                    / {billingCycle === 'monthly' ? 'Month' : 'Year'}
+                                </span>
                             </div>
 
                             <ul className="space-y-6 mb-16 flex-1 relative z-10">

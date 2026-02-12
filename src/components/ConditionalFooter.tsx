@@ -5,10 +5,11 @@ import { Footer } from "./Footer";
 
 export function ConditionalFooter() {
     const pathname = usePathname();
-    const isAuthPage = pathname === "/sign-in" ||
-        pathname === "/sign-up" ||
-        pathname?.startsWith("/sign-in/") ||
-        pathname?.startsWith("/sign-up/");
+
+    // Hide footer on anything that looks like an auth or sign in/up page
+    const isAuthPage = pathname?.includes("sign-in") ||
+        pathname?.includes("sign-up") ||
+        pathname?.includes("auth");
 
     if (isAuthPage) return null;
     return <Footer />;

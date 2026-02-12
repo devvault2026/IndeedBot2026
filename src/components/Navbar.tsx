@@ -178,15 +178,19 @@ export const Navbar = () => {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: "100%" }}
                         transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                        className="fixed inset-0 z-[100] bg-white dark:bg-[#0a0a0a] lg:hidden p-6 flex flex-col overflow-y-auto"
+                        className="fixed inset-0 z-[100] bg-background lg:hidden p-6 flex flex-col overflow-y-auto"
                     >
                         <div className="flex justify-between items-center mb-10 pb-6 border-b border-border/50">
-                            <span className="text-xl font-black italic uppercase tracking-tighter text-foreground">INDEEDBOT</span>
+                            <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2">
+                                <span className="text-xl font-black italic uppercase tracking-tighter text-foreground">
+                                    Indeed<span className="text-primary not-italic">Bot</span>
+                                </span>
+                            </Link>
                             <div className="flex items-center gap-4">
                                 <ThemeToggle />
                                 <button
                                     onClick={() => setIsMobileMenuOpen(false)}
-                                    className="w-10 h-10 bg-neutral-100 dark:bg-neutral-900 rounded-full flex items-center justify-center text-foreground border border-border"
+                                    className="w-10 h-10 glass rounded-full flex items-center justify-center text-foreground border border-border"
                                 >
                                     <X className="w-5 h-5" />
                                 </button>
@@ -195,7 +199,7 @@ export const Navbar = () => {
 
                         <div className="flex-1 space-y-10">
                             <div className="space-y-6">
-                                <p className="text-[10px] font-black text-primary uppercase tracking-[0.3em]">AI COMMAND CENTER</p>
+                                <p className="text-[10px] font-black text-primary uppercase tracking-[0.3em] font-mono">AI COMMAND CENTER</p>
                                 <div className="grid gap-2">
                                     {[
                                         { name: "Strategist", path: "intelligence" },
@@ -207,36 +211,36 @@ export const Navbar = () => {
                                             key={cap.name}
                                             href={`/features/${cap.path}`}
                                             onClick={() => setIsMobileMenuOpen(false)}
-                                            className="text-4xl font-black text-foreground italic uppercase tracking-tighter hover:text-primary transition-colors flex items-center justify-between group py-2"
+                                            className="text-4xl font-black text-foreground italic uppercase tracking-tighter hover:text-primary transition-all flex items-center justify-between group py-2"
                                         >
-                                            {cap.name}
-                                            <ArrowRight className="w-6 h-6 text-primary" />
+                                            <span className="relative group-hover:translate-x-2 transition-transform duration-300">{cap.name}</span>
+                                            <ArrowRight className="w-6 h-6 text-primary group-hover:translate-x-1 transition-transform" />
                                         </Link>
                                     ))}
                                 </div>
                             </div>
 
                             <div className="space-y-6 pt-6 border-t border-border/50">
-                                <p className="text-[10px] font-black text-neutral-500 uppercase tracking-[0.3em]">RESOURCES</p>
+                                <p className="text-[10px] font-black text-neutral-500 uppercase tracking-[0.3em] font-mono">RESOURCES</p>
                                 <div className="grid gap-6">
-                                    <Link href="/blog" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-black text-foreground/70 uppercase tracking-tighter hover:text-foreground">Blog</Link>
-                                    <Link href="/pricing" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-black text-foreground/70 uppercase tracking-tighter hover:text-foreground">Pricing</Link>
-                                    <Link href="/docs" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-black text-foreground/70 uppercase tracking-tighter hover:text-foreground">How it Works</Link>
+                                    <Link href="/blog" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-black text-foreground uppercase tracking-tighter hover:text-primary transition-colors">Blog</Link>
+                                    <Link href="/pricing" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-black text-foreground uppercase tracking-tighter hover:text-primary transition-colors">Pricing</Link>
+                                    <Link href="/docs" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-black text-foreground uppercase tracking-tighter hover:text-primary transition-colors">How it Works</Link>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="mt-auto space-y-4">
+                        <div className="mt-auto space-y-4 pt-8">
                             <SignedOut>
-                                <Link href="/sign-in">
-                                    <button onClick={() => setIsMobileMenuOpen(false)} className="w-full py-6 glass text-foreground font-black uppercase tracking-[0.3em] rounded-2xl text-xs flex items-center justify-center gap-4">
+                                <Link href="/sign-in" className="block">
+                                    <button onClick={() => setIsMobileMenuOpen(false)} className="w-full py-6 glass text-foreground font-black uppercase tracking-[0.3em] rounded-2xl text-[10px] flex items-center justify-center gap-4 hover:border-primary/30 transition-all">
                                         <LogIn className="w-4 h-4" />
                                         MEMBER LOGIN
                                     </button>
                                 </Link>
                             </SignedOut>
-                            <button onClick={() => setIsMobileMenuOpen(false)} className="w-full py-6 bg-primary text-white font-black uppercase tracking-[0.3em] rounded-2xl text-xs shadow-glow-primary flex items-center justify-center gap-4">
-                                <Chrome className="w-4 h-4" />
+                            <button onClick={() => setIsMobileMenuOpen(false)} className="w-full py-6 bg-primary text-white font-black uppercase tracking-[0.3em] rounded-2xl text-[10px] shadow-glow-primary flex items-center justify-center gap-4 hover:scale-[1.02] active:scale-[0.98] transition-all">
+                                <Chrome className="w-4 h-4 shadow-glow-white" />
                                 ADD TO CHROME — FREE
                             </button>
                         </div>

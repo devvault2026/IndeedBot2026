@@ -1,10 +1,18 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ShieldCheck, Twitter, Github, Linkedin, Cpu, Zap, Globe, Lock } from "lucide-react";
 import { motion } from "framer-motion";
 
 export const Footer = () => {
+    const pathname = usePathname();
+    const isAuthPage = pathname?.includes("sign-in") ||
+        pathname?.includes("sign-up") ||
+        pathname?.includes("auth");
+
+    if (isAuthPage) return null;
+
     return (
         <footer className="bg-background text-foreground py-24 md:py-32 px-4 relative overflow-hidden border-t border-border">
             {/* Background Grid Accent */}

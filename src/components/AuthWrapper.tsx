@@ -307,28 +307,7 @@ export const AuthWrapper = ({ children }: { children: React.ReactNode }) => {
                     </div>
                 </div>
 
-                {/* Bottom Security Footer */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.8, duration: 0.8 }}
-                    className="p-8 flex flex-col items-center gap-4 relative z-10 border-t border-border/50 bg-foreground/[0.01]"
-                >
-                    <div className="flex items-center gap-6 text-neutral-500">
-                        <div className="flex items-center gap-2">
-                            <Shield className="w-3.5 h-3.5 text-primary/70" />
-                            <span className="text-[9px] font-black uppercase tracking-[0.25em]">End-to-End Encrypted</span>
-                        </div>
-                        <div className="w-px h-3 bg-border" />
-                        <div className="flex items-center gap-2">
-                            <Lock className="w-3.5 h-3.5 text-primary/70" />
-                            <span className="text-[9px] font-black uppercase tracking-[0.25em]">SOC 2 Compliant</span>
-                        </div>
-                    </div>
-                    <span className="text-[10px] font-bold text-neutral-600 dark:text-neutral-500 italic tracking-[0.3em]">
-                        © 2026 IndeedBot · Career Intelligence Infrastructure
-                    </span>
-                </motion.div>
+                {/* Bottom Security Footer removed as per request */}
             </motion.div>
         </div>
     );
