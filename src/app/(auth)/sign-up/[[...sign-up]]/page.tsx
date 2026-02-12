@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { SignUp } from "@clerk/nextjs";
 import { AuthWrapper } from "@/components/AuthWrapper";
 import { dark } from "@clerk/themes";
@@ -7,7 +8,7 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-export default function Page() {
+function SignUpContent() {
     const { theme } = useTheme();
     const [mounted, setMounted] = useState(false);
     const searchParams = useSearchParams();
@@ -16,14 +17,11 @@ export default function Page() {
         setMounted(true);
     }, []);
 
-    // Prevent hydration mismatch by using dark theme as default for the Clerk component during SSR
     const clerkTheme = mounted && theme === "light" ? undefined : dark;
 
-    // Check if the user came from the Chrome extension
     const isFromExtension = searchParams.get("source") === "extension";
     const extId = searchParams.get("ext_id") || "";
 
-    // If coming from extension, redirect to callback page after auth
     const extensionRedirectUrl = isFromExtension
         ? `/auth/extension-callback?ext_id=${encodeURIComponent(extId)}`
         : undefined;
@@ -65,5 +63,13 @@ export default function Page() {
                 }}
             />
         </AuthWrapper>
+    );
+}
+
+export default function Page() {
+    return (
+        <Suspense>
+            <SignUpContent />
+        </Suspense>
     );
 }

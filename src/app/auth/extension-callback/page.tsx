@@ -3,13 +3,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 declare const chrome: any;
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { useSearchParams } from "next/navigation";
 
 type Status = "sending" | "success" | "error";
 
-export default function ExtensionCallbackPage() {
+function ExtensionCallbackContent() {
     const { user, isLoaded, isSignedIn } = useUser();
     const searchParams = useSearchParams();
     const [status, setStatus] = useState<Status>("sending");
@@ -150,5 +150,17 @@ export default function ExtensionCallbackPage() {
                 )}
             </div>
         </div>
+    );
+}
+
+export default function ExtensionCallbackPage() {
+    return (
+        <Suspense fallback={
+            <div className="fixed inset-0 bg-background flex items-center justify-center">
+                <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+            </div>
+        }>
+            <ExtensionCallbackContent />
+        </Suspense>
     );
 }
