@@ -39,7 +39,7 @@ export async function GET(request: NextRequest) {
                         email: payload.email as string,
                         firstName: (payload.name as string)?.split(" ")[0] ?? null,
                         lastName: (payload.name as string)?.split(" ").slice(1).join(" ") ?? null,
-                        imageUrl: null,
+                        imageUrl: (payload.picture as string) ?? null,
                     },
                     subscription: {
                         plan: payload.plan ?? "free",

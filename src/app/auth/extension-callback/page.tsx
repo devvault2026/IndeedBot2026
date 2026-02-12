@@ -118,7 +118,7 @@ function ExtensionCallbackContent() {
                             You&apos;re Connected!
                         </h1>
                         <p className="text-neutral-500 mt-3 text-sm">
-                            IndeedBot is now active. You can close this tab and return to the extension.
+                            IndeedBot is now active. Redirecting you to Indeed to start your search...
                         </p>
                         <div className="mt-6 inline-flex items-center gap-2 px-4 py-2 bg-primary/5 border border-primary/20 rounded-xl">
                             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
@@ -126,6 +126,13 @@ function ExtensionCallbackContent() {
                                 System Active
                             </span>
                         </div>
+                        <script dangerouslySetInnerHTML={{
+                            __html: `
+                                setTimeout(() => {
+                                    window.location.href = "https://www.indeed.com";
+                                }, 2000);
+                            `
+                        }} />
                     </>
                 )}
 

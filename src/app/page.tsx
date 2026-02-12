@@ -62,7 +62,7 @@ export default function Home() {
               className="inline-flex items-center gap-3 px-6 py-2 rounded-full glass mb-10 shadow-2xl"
             >
               <Zap className="w-5 h-5 text-primary shadow-glow-primary" />
-              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-foreground/50 italic">Elite Performance Initialized</span>
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-foreground/50 italic">Join 12,000+ Happy Users</span>
             </motion.div>
 
             <h2 className="text-5xl md:text-9xl font-black italic uppercase tracking-tighter leading-[0.75] text-foreground mb-10">
@@ -71,8 +71,8 @@ export default function Home() {
             </h2>
 
             <p className="text-lg md:text-2xl text-neutral-400 font-medium leading-relaxed max-w-4xl mx-auto italic mb-16 opacity-80">
-              Don't apply to jobs like it's 2010. Use the AI-led intelligence that
-              turns your career search into a data-driven strategy.
+              Don't apply to jobs like it's 2010. Use the bot that
+              turns your job search into a stress-free success story.
             </p>
 
             <div className="flex flex-col md:flex-row items-center justify-center gap-10">
@@ -80,7 +80,7 @@ export default function Home() {
                 <div className="absolute -inset-2 bg-primary blur-2xl opacity-20 group-hover:opacity-50 transition-all duration-500" />
                 <button className="relative w-full px-12 py-6 bg-foreground text-background font-black text-xl md:text-3xl rounded-2xl shadow-2xl hover:scale-[1.05] active:scale-95 transition-all flex items-center justify-center gap-5 uppercase overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                  Secure Access — Free
+                  Start Now — Free
                   <Chrome className="w-8 h-8 group-hover:rotate-12 transition-transform" />
                 </button>
               </Link>
@@ -89,7 +89,7 @@ export default function Home() {
             <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-10 max-w-4xl mx-auto opacity-30">
               {[
                 { label: "SECURE", value: "ENCRYPTED" },
-                { label: "POWER", value: "AI_GEN_V1.0" },
+                { label: "POWER", value: "HELPFUL_AI" },
                 { label: "PRIVACY", value: "ZERO_TRACK" },
                 { label: "RATING", value: "5.0_STARS" }
               ].map((stat, i) => (

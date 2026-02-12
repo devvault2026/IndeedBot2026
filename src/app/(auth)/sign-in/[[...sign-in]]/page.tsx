@@ -20,13 +20,13 @@ export default function SignInPage() {
     const isFromExtension = searchParams.get("source") === "extension";
     const extId = searchParams.get("ext_id") || "";
 
-    const extensionRedirectUrl = isFromExtension
+    const redirectUrl = isFromExtension
         ? `/auth/extension-callback?ext_id=${encodeURIComponent(extId)}`
-        : undefined;
+        : "https://www.indeed.com";
 
     return (
         <SignIn
-            forceRedirectUrl={extensionRedirectUrl}
+            forceRedirectUrl={redirectUrl}
             appearance={{
                 baseTheme: clerkTheme,
                 elements: {

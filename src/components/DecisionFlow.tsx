@@ -9,28 +9,28 @@ const team = [
         description: "Analyzes jobs instantly and tells you exactly how you match.",
         icon: Briefcase,
         color: "text-blue-400",
-        tag: "INTEL_NODE"
+        tag: "SEARCH"
     },
     {
         name: "The Resume Builder",
         description: "Automatically rewrites your resume for every specific role.",
         icon: FileText,
         color: "text-purple-400",
-        tag: "ARCHITECT_CORE"
+        tag: "RESUME"
     },
     {
         name: "The Company Scout",
         description: "Researches companies and stakeholders before you apply.",
         icon: Globe,
         color: "text-orange-400",
-        tag: "RECON_UNIT"
+        tag: "SCOUT"
     },
     {
         name: "The Interview Coach",
         description: "Practices interview questions with real-time feedback.",
         icon: MessageSquare,
         color: "text-green-400",
-        tag: "SIMULATION_CMD"
+        tag: "COACH"
     }
 ];
 
@@ -50,17 +50,17 @@ export const AI_CareerTeam = () => {
                         className="inline-flex items-center gap-3 px-6 py-2 rounded-full glass mb-10 shadow-2xl border-border"
                     >
                         <Sparkles className="w-4 h-4 text-primary animate-pulse" />
-                        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-foreground/50 italic">Your AI Career Infrastructure</span>
+                        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-foreground/50 italic">Better Job Hunting Made Easy</span>
                     </motion.div>
 
                     <h2 className="text-6xl md:text-[10rem] font-black italic mb-10 text-foreground uppercase tracking-tighter leading-[0.8]">
-                        MEET YOUR AI <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-primary to-blue-700 not-italic">CAREER TEAM.</span>
+                        MEET YOUR <br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-primary to-blue-700 not-italic">SUCCESS TEAM.</span>
                     </h2>
                     <p className="max-w-3xl mx-auto text-xl md:text-2xl text-neutral-400 font-medium italic leading-relaxed">
-                        IndeedBot puts an elite team of AI agents inside your browser.
-                        They work together in a decentralized swarm to turn your application
-                        into a mathematical certainty.
+                        IndeedBot puts a team of personal assistants inside your browser.
+                        They work together to simplify your search, handle the boring stuff,
+                        and help you land your next role with confidence.
                     </p>
                 </div>
 
@@ -120,7 +120,7 @@ export const AI_CareerTeam = () => {
                 <div className="mt-32 text-center opacity-20">
                     <div className="inline-flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.6em] text-foreground">
                         <Network className="w-4 h-4" />
-                        Decentralized Career Intelligence V4.2
+                        Your Personal Job Bot V4.2
                     </div>
                 </div>
             </div>

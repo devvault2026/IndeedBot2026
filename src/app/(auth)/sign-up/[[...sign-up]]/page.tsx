@@ -20,13 +20,13 @@ export default function SignUpPage() {
     const isFromExtension = searchParams.get("source") === "extension";
     const extId = searchParams.get("ext_id") || "";
 
-    const extensionRedirectUrl = isFromExtension
+    const redirectUrl = isFromExtension
         ? `/auth/extension-callback?ext_id=${encodeURIComponent(extId)}`
-        : undefined;
+        : "https://www.indeed.com";
 
     return (
         <SignUp
-            forceRedirectUrl={extensionRedirectUrl}
+            forceRedirectUrl={redirectUrl}
             appearance={{
                 baseTheme: clerkTheme,
                 elements: {

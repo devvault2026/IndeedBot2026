@@ -40,6 +40,7 @@ export async function POST() {
             sub: userId,
             email: user?.emailAddresses[0]?.emailAddress,
             name: `${user?.firstName ?? ""} ${user?.lastName ?? ""}`.trim(),
+            picture: user?.imageUrl ?? null,
             // Subscription fields — defaults to "free" until payment is integrated
             plan: "free",
             plan_status: "active",

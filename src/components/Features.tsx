@@ -27,16 +27,16 @@ export const Features = () => {
                         className="inline-flex items-center gap-3 px-6 py-2 rounded-full glass mb-10 shadow-2xl"
                     >
                         <Zap className="w-4 h-4 text-primary shadow-glow-primary" />
-                        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-foreground/50">Tactical Dominance</span>
+                        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-foreground/50">Ready to Win?</span>
                     </motion.div>
 
                     <h2 className="text-6xl md:text-[12rem] font-black italic mb-10 text-foreground uppercase tracking-tighter leading-[0.8]">
-                        UNFAIR <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-primary to-blue-700 not-italic">ADVANTAGE.</span>
+                        GET <br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-primary to-blue-700 not-italic">HIRED.</span>
                     </h2>
                     <p className="max-w-2xl mx-auto text-xl md:text-2xl text-neutral-400 font-medium italic">
-                        The tools recruiters don't want you to have. Designed to bypass filters
-                        and put you in the top 1% of applicants instantly.
+                        The help you need to land your next role. Designed to help you stand out
+                        and get noticed by hiring managers instantly.
                     </p>
                 </div>
 
@@ -47,16 +47,16 @@ export const Features = () => {
                         <div className="space-y-10">
                             <div className="inline-flex items-center gap-4 px-5 py-2 rounded-[2rem] bg-primary/10 border border-primary/20">
                                 <Target className="w-5 h-5 text-primary" />
-                                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary">Intelligence Node</span>
+                                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary">Smart Search</span>
                             </div>
                             <h3 className="text-4xl md:text-7xl font-black text-foreground uppercase italic tracking-tighter leading-none">
                                 Scan the <br />
-                                <span className="text-primary not-italic">Deep Job Data.</span>
+                                <span className="text-primary not-italic">Job Insights.</span>
                             </h3>
                             <p className="text-xl md:text-2xl text-neutral-400 font-medium leading-relaxed italic">
-                                Real-time telemetry on every listing. Verify salary floors,
-                                detect "ghost" postings, and see exactly how your profile
-                                maps to the hiring manager's private checklist.
+                                Real-time info on every listing. Check salary ranges,
+                                avoid "ghost" postings, and see exactly how your profile
+                                matches what the hiring manager is looking for.
                             </p>
                             <div className="grid grid-cols-2 gap-6">
                                 {[
@@ -121,7 +121,7 @@ export const Features = () => {
                                         <div className="mt-8 p-4 rounded-xl bg-primary/5 border border-primary/10">
                                             <div className="flex items-center gap-2 mb-2">
                                                 <Brain className="w-3 h-3 text-primary" />
-                                                <span className="text-[8px] font-black text-primary uppercase tracking-widest">Neural Suggestion</span>
+                                                <span className="text-[8px] font-black text-primary uppercase tracking-widest">Job Bot Suggestion</span>
                                             </div>
                                             <p className="text-[10px] text-neutral-400 leading-relaxed italic">
                                                 "This job post prioritizes 'Go-to-Market' strategy over 'Product Ops'. Adjust your cover letter highlight to focus on Q3 revenue impact."
@@ -138,7 +138,7 @@ export const Features = () => {
                         <FeatureCard className="aspect-[4/3] lg:order-2">
                             <div className="h-full flex flex-col gap-6">
                                 <div className="flex items-center justify-between border-b border-border pb-4">
-                                    <div className="text-[10px] font-black text-purple-400 uppercase tracking-widest italic">Semantic Refactor</div>
+                                    <div className="text-[10px] font-black text-purple-400 uppercase tracking-widest italic">Better Wording</div>
                                     <Terminal className="w-4 h-4 text-purple-400" />
                                 </div>
                                 <div className="flex-1 space-y-6">
@@ -177,16 +177,16 @@ export const Features = () => {
                         <div className="space-y-10 lg:order-1">
                             <div className="inline-flex items-center gap-4 px-5 py-2 rounded-[2rem] bg-purple-500/10 border border-purple-500/20">
                                 <FileText className="w-5 h-5 text-purple-400" />
-                                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-purple-400">The Architect</span>
+                                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-purple-400">The Writer</span>
                             </div>
                             <h3 className="text-4xl md:text-7xl font-black text-foreground uppercase italic tracking-tighter leading-none">
                                 Rewrite for <br />
-                                <span className="text-purple-400 not-italic">The Algorithm.</span>
+                                <span className="text-purple-400 not-italic">The Results.</span>
                             </h3>
                             <p className="text-xl md:text-2xl text-neutral-400 font-medium leading-relaxed italic">
-                                Don't let a robot reject your hard work. Our engine re-calculates
-                                your career history in real-time, injecting semantic weight
-                                that satisfies even the strictest ATS filters.
+                                Don't let a filter reject your hard work. Our engine updates
+                                your career history in real-time, using the right words
+                                to pass even the toughest job board filters.
                             </p>
                             <div className="space-y-4">
                                 {[
@@ -209,7 +209,7 @@ export const Features = () => {
                         <div className="space-y-10">
                             <div className="inline-flex items-center gap-4 px-5 py-2 rounded-[2rem] bg-green-500/10 border border-green-500/20">
                                 <Activity className="w-5 h-5 text-green-400" />
-                                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-green-400">Tactical simulation</span>
+                                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-green-400">Mock Interviews</span>
                             </div>
                             <h3 className="text-4xl md:text-7xl font-black text-foreground uppercase italic tracking-tighter leading-none">
                                 Practice with <br />
@@ -217,8 +217,8 @@ export const Features = () => {
                             </h3>
                             <p className="text-xl md:text-2xl text-neutral-400 font-medium leading-relaxed italic">
                                 Walk into every meeting with total confidence. IndeedBot acts
-                                as your personal sparring partner, simulating specific behavioral
-                                rounds and analyzing your psychological alignment.
+                                as your personal sparring partner, helping you practice
+                                difficult questions and building your confidence.
                             </p>
                             <button className="px-10 py-5 glass text-foreground font-black text-sm rounded-2xl flex items-center gap-4 uppercase hover:bg-foreground/5 transition-all w-fit group">
                                 Trial the Simulation <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
@@ -282,7 +282,7 @@ export const Features = () => {
                     >
                         <div className="absolute -inset-4 bg-primary blur-2xl opacity-20" />
                         <button className="relative px-16 py-8 bg-foreground text-background font-black text-2xl md:text-3xl rounded-3xl shadow-2xl flex items-center gap-6 uppercase transition-all">
-                            INITIALIZE INFRASTRUCTURE <ArrowRight className="w-8 h-8" />
+                            GET STARTED FOR FREE <ArrowRight className="w-8 h-8" />
                         </button>
                     </motion.div>
                 </div>

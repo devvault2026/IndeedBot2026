@@ -6,12 +6,11 @@ import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 
 const AI_STEPS = [
-    "Scanning Job Post...",
-    "Finding Hidden Salary...",
-    "Matching Elite Keywords...",
-    "Perfecting Bullet Points...",
-    "Finalizing Performance Score...",
-    "Ready for Placement."
+    "Finding the best jobs...",
+    "Checking salary info...",
+    "Polishing your details...",
+    "Prepping your application...",
+    "Ready to send!"
 ];
 
 export const Hero = () => {
@@ -152,7 +151,7 @@ export const Hero = () => {
                                             <Star key={i} className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
                                         ))}
                                     </div>
-                                    <span className="text-xs font-black text-foreground italic">4.9/5 Elite Tier</span>
+                                    <span className="text-xs font-black text-foreground italic">4.9/5 User Rating</span>
                                 </div>
                                 <div className="flex items-center gap-3">
                                     <span className="text-[10px] font-black uppercase tracking-[0.4em] text-neutral-500">
@@ -232,8 +231,8 @@ export const Hero = () => {
                                                 <Zap className="w-6 h-6 text-primary" />
                                             </div>
                                             <div>
-                                                <div className="text-xs font-black uppercase text-foreground">AI Strategist</div>
-                                                <div className="text-[10px] text-neutral-500 font-mono">Analyzing Target...</div>
+                                                <div className="text-xs font-black uppercase text-foreground">Job Search Assistant</div>
+                                                <div className="text-[10px] text-neutral-500 font-mono">Finding your next role...</div>
                                             </div>
                                         </div>
                                         <div className="px-3 py-1 bg-green-500/10 border border-green-500/20 rounded-full text-[10px] font-black text-green-500 uppercase tracking-wider animate-pulse">
@@ -306,9 +305,9 @@ export const Hero = () => {
                             >
                                 <div className="flex items-center gap-3 mb-2">
                                     <TrendingUp className="w-4 h-4 text-green-500" />
-                                    <span className="text-[10px] font-black uppercase text-foreground">Salary Delta</span>
+                                    <span className="text-[10px] font-black uppercase text-foreground">Est. Pay Increase</span>
                                 </div>
-                                <div className="text-xl font-black text-green-500 italic">+$42,000</div>
+                                <div className="text-xl font-black text-green-500 italic">+$12,000</div>
                             </motion.div>
                         </motion.div>
                     </motion.div>
