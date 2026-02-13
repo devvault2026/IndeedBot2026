@@ -36,21 +36,10 @@ export async function POST() {
         const user = await currentUser();
         const metadata = user?.publicMetadata as any;
 
-        // ─── STRIPE SUBSCRIPTION GATE ───
-        // Only paying customers can access the extension
-        const stripeStatus = metadata?.stripeStatus;
-        const isSubscribed = ["active", "trialing"].includes(stripeStatus || "");
-
-        if (!isSubscribed) {
-            return NextResponse.json(
-                {
-                    error: "Subscription required",
-                    message: "You need an active IndeedBot subscription to use the extension. Please subscribe at our website.",
-                    requiresSubscription: true,
-                },
-                { status: 403, headers: corsHeaders() }
-            );
-        }
+        // ─── OPTIONAL STRIPE DATA ───
+        const stripeStatus = metadata?.stripeStatus || "free";
+        const isSubscribed = ["active", "trialing"].includes(stripeStatus);
+        const plan = metadata?.stripePlan || "free";
 
         // Generate a JWT valid for 30 days
         const token = await new SignJWT({
@@ -59,7 +48,7 @@ export async function POST() {
             name: `${user?.firstName ?? ""} ${user?.lastName ?? ""}`.trim(),
             picture: user?.imageUrl ?? null,
             // Include real subscription data
-            plan: metadata?.stripePlan || "elite",
+            plan: plan,
             plan_status: stripeStatus,
             plan_expires: metadata?.stripeCurrentPeriodEnd || null,
             stripe_customer_id: metadata?.stripeCustomerId || null,
@@ -80,7 +69,7 @@ export async function POST() {
                     imageUrl: user?.imageUrl,
                 },
                 subscription: {
-                    plan: metadata?.stripePlan || "elite",
+                    plan: plan,
                     status: stripeStatus,
                     expiresAt: metadata?.stripeCurrentPeriodEnd || null,
                 },

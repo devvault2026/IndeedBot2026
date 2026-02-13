@@ -45,7 +45,7 @@ export async function GET(request: NextRequest) {
                         plan: payload.plan ?? "free",
                         status: payload.plan_status ?? "inactive",
                         expiresAt: payload.plan_expires ?? null,
-                        isActive: ["active", "trialing"].includes(
+                        isActive: ["active", "trialing", "free"].includes(
                             (payload.plan_status as string) || ""
                         ),
                     },
@@ -88,7 +88,7 @@ export async function GET(request: NextRequest) {
                 plan: metadata?.stripePlan || "free",
                 status: stripeStatus,
                 expiresAt: metadata?.stripeCurrentPeriodEnd || null,
-                isActive: ["active", "trialing"].includes(stripeStatus),
+                isActive: ["active", "trialing", "free"].includes(stripeStatus),
             },
         },
         { status: 200, headers: corsHeaders() }
