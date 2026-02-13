@@ -43,14 +43,16 @@ export async function GET(request: NextRequest) {
                     },
                     subscription: {
                         plan: payload.plan ?? "free",
-                        status: payload.plan_status ?? "active",
+                        status: payload.plan_status ?? "inactive",
                         expiresAt: payload.plan_expires ?? null,
+                        isActive: ["active", "trialing"].includes(
+                            (payload.plan_status as string) || ""
+                        ),
                     },
                 },
                 { status: 200, headers: corsHeaders() }
             );
         } catch {
-            // Token is expired or invalid
             return NextResponse.json(
                 { isAuthenticated: false, error: "Invalid or expired token" },
                 { status: 401, headers: corsHeaders() }
@@ -69,6 +71,8 @@ export async function GET(request: NextRequest) {
     }
 
     const user = await currentUser();
+    const metadata = user?.publicMetadata as any;
+    const stripeStatus = metadata?.stripeStatus || "inactive";
 
     return NextResponse.json(
         {
@@ -79,6 +83,12 @@ export async function GET(request: NextRequest) {
                 firstName: user?.firstName,
                 lastName: user?.lastName,
                 imageUrl: user?.imageUrl,
+            },
+            subscription: {
+                plan: metadata?.stripePlan || "free",
+                status: stripeStatus,
+                expiresAt: metadata?.stripeCurrentPeriodEnd || null,
+                isActive: ["active", "trialing"].includes(stripeStatus),
             },
         },
         { status: 200, headers: corsHeaders() }

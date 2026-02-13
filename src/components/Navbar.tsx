@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, Briefcase, FileText, Globe, MessageSquare, Menu, X, ArrowRight, Chrome, LogIn } from "lucide-react";
+import { ChevronDown, Briefcase, FileText, Globe, MessageSquare, Menu, X, ArrowRight, Chrome, LogIn, LayoutDashboard } from "lucide-react";
 import { useState, useEffect } from "react";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
@@ -130,6 +130,10 @@ export const Navbar = () => {
                             </Link>
                         </SignedOut>
                         <SignedIn>
+                            <Link href="/dashboard" className="hidden md:flex items-center gap-2 text-[10px] font-black text-primary hover:text-primary/80 transition-colors uppercase tracking-[0.2em] group px-4 py-2 bg-primary/10 rounded-full border border-primary/20">
+                                <LayoutDashboard className="w-3.5 h-3.5" />
+                                <span>Console</span>
+                            </Link>
                             <UserButton
                                 appearance={{
                                     baseTheme: clerkTheme,
@@ -150,7 +154,15 @@ export const Navbar = () => {
                                         navbar: "hidden",
                                     }
                                 }}
-                            />
+                            >
+                                <UserButton.MenuItems>
+                                    <UserButton.Link
+                                        label="Console"
+                                        labelIcon={<LayoutDashboard className="w-4 h-4" />}
+                                        href="/dashboard"
+                                    />
+                                </UserButton.MenuItems>
+                            </UserButton>
                         </SignedIn>
                     </div>
 
@@ -231,6 +243,14 @@ export const Navbar = () => {
                         </div>
 
                         <div className="mt-auto space-y-4 pt-8">
+                            <SignedIn>
+                                <Link href="/dashboard" className="block" onClick={() => setIsMobileMenuOpen(false)}>
+                                    <button className="w-full py-6 bg-primary/10 border border-primary/20 text-primary font-black uppercase tracking-[0.3em] rounded-2xl text-[10px] flex items-center justify-center gap-4 hover:bg-primary/20 transition-all">
+                                        <LayoutDashboard className="w-4 h-4" />
+                                        ACCESS CONSOLE
+                                    </button>
+                                </Link>
+                            </SignedIn>
                             <SignedOut>
                                 <Link href="/sign-in" className="block">
                                     <button onClick={() => setIsMobileMenuOpen(false)} className="w-full py-6 glass text-foreground font-black uppercase tracking-[0.3em] rounded-2xl text-[10px] flex items-center justify-center gap-4 hover:border-primary/30 transition-all">

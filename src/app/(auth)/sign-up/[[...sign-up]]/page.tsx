@@ -22,7 +22,7 @@ export default function SignUpPage() {
 
     const redirectUrl = isFromExtension
         ? `/auth/extension-callback?ext_id=${encodeURIComponent(extId)}`
-        : "https://www.indeed.com";
+        : "/dashboard";
 
     return (
         <SignUp

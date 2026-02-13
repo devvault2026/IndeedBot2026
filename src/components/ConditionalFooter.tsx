@@ -7,10 +7,11 @@ export function ConditionalFooter() {
     const pathname = usePathname();
 
     // Hide footer on anything that looks like an auth or sign in/up page
-    const isAuthPage = pathname?.includes("sign-in") ||
+    const isHiddenPage = pathname?.includes("sign-in") ||
         pathname?.includes("sign-up") ||
-        pathname?.includes("auth");
+        pathname?.includes("auth") ||
+        pathname?.includes("dashboard");
 
-    if (isAuthPage) return null;
+    if (isHiddenPage) return null;
     return <Footer />;
 }

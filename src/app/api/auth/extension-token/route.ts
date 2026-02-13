@@ -34,6 +34,23 @@ export async function POST() {
         }
 
         const user = await currentUser();
+        const metadata = user?.publicMetadata as any;
+
+        // ─── STRIPE SUBSCRIPTION GATE ───
+        // Only paying customers can access the extension
+        const stripeStatus = metadata?.stripeStatus;
+        const isSubscribed = ["active", "trialing"].includes(stripeStatus || "");
+
+        if (!isSubscribed) {
+            return NextResponse.json(
+                {
+                    error: "Subscription required",
+                    message: "You need an active IndeedBot subscription to use the extension. Please subscribe at our website.",
+                    requiresSubscription: true,
+                },
+                { status: 403, headers: corsHeaders() }
+            );
+        }
 
         // Generate a JWT valid for 30 days
         const token = await new SignJWT({
@@ -41,10 +58,11 @@ export async function POST() {
             email: user?.emailAddresses[0]?.emailAddress,
             name: `${user?.firstName ?? ""} ${user?.lastName ?? ""}`.trim(),
             picture: user?.imageUrl ?? null,
-            // Subscription fields — defaults to "free" until payment is integrated
-            plan: "free",
-            plan_status: "active",
-            plan_expires: null,
+            // Include real subscription data
+            plan: metadata?.stripePlan || "elite",
+            plan_status: stripeStatus,
+            plan_expires: metadata?.stripeCurrentPeriodEnd || null,
+            stripe_customer_id: metadata?.stripeCustomerId || null,
             iat: Math.floor(Date.now() / 1000),
         })
             .setProtectedHeader({ alg: "HS256" })
@@ -60,6 +78,11 @@ export async function POST() {
                     firstName: user?.firstName,
                     lastName: user?.lastName,
                     imageUrl: user?.imageUrl,
+                },
+                subscription: {
+                    plan: metadata?.stripePlan || "elite",
+                    status: stripeStatus,
+                    expiresAt: metadata?.stripeCurrentPeriodEnd || null,
                 },
             },
             { status: 200, headers: corsHeaders() }

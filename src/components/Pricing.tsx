@@ -1,11 +1,42 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, ShieldCheck, Zap, Crown, Sparkles, Command, ArrowRight, Star } from "lucide-react";
+import { Check, ShieldCheck, Zap, Crown, Sparkles, Command, ArrowRight, Star, Loader2 } from "lucide-react";
 import { useState } from "react";
+import { useAuth } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 
 export const Pricing = () => {
     const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">("yearly");
+    const [checkingOut, setCheckingOut] = useState(false);
+    const { isSignedIn } = useAuth();
+    const router = useRouter();
+
+    const handleSubscribe = async () => {
+        if (!isSignedIn) {
+            router.push("/sign-in");
+            return;
+        }
+
+        setCheckingOut(true);
+        try {
+            const res = await fetch("/api/stripe/checkout", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ billingCycle }),
+            });
+            const data = await res.json();
+            if (data.url) {
+                window.location.href = data.url;
+            } else {
+                alert(data.error || "Failed to create checkout session");
+            }
+        } catch (error) {
+            console.error("Checkout failed:", error);
+        } finally {
+            setCheckingOut(false);
+        }
+    };
 
     return (
         <section id="pricing" className="py-20 md:py-32 px-6 relative overflow-hidden bg-background">
@@ -121,9 +152,17 @@ export const Pricing = () => {
                                 ))}
                             </ul>
 
-                            <button className="w-full py-7 bg-primary text-white font-black hover:scale-[1.02] transition-all text-sm uppercase tracking-[0.3em] rounded-3xl shadow-glow-primary flex items-center justify-center gap-4 group relative overflow-hidden">
+                            <button
+                                onClick={handleSubscribe}
+                                disabled={checkingOut}
+                                className="w-full py-7 bg-primary text-white font-black hover:scale-[1.02] transition-all text-sm uppercase tracking-[0.3em] rounded-3xl shadow-glow-primary flex items-center justify-center gap-4 group relative overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed"
+                            >
                                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                                Initialize Elite Access <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                                {checkingOut ? (
+                                    <Loader2 className="w-5 h-5 animate-spin" />
+                                ) : (
+                                    <>Initialize Elite Access <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" /></>
+                                )}
                             </button>
                         </div>
                     </div>
