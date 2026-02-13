@@ -36,6 +36,7 @@ export const metadata: Metadata = {
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ConditionalFooter } from "@/components/ConditionalFooter";
+import { Analytics } from "@vercel/analytics/next";
 
 const clerkPubKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 // ... (omitting AuthProvider for brevity, wait I should include it if I'm replacing the block)
@@ -71,6 +72,7 @@ export default function RootLayout({
               </div>
               <ConditionalFooter />
             </div>
+            <Analytics />
           </ThemeProvider>
         </body>
       </html>
